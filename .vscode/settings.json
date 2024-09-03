@@ -1,0 +1,29 @@
+{
+    "C_Cpp.intelliSenseEngine": "default",
+    "idf.adapterTargetName": "esp32",
+    "idf.customExtraPaths": "/home/elias/.espressif/tools/xtensa-esp-elf-gdb/12.1_20231023/xtensa-esp-elf-gdb/bin:/home/elias/.espressif/tools/riscv32-esp-elf-gdb/12.1_20231023/riscv32-esp-elf-gdb/bin:/home/elias/.espressif/tools/xtensa-esp-elf/esp-13.2.0_20230928/xtensa-esp-elf/bin:/home/elias/.espressif/tools/riscv32-esp-elf/esp-13.2.0_20230928/riscv32-esp-elf/bin:/home/elias/.espressif/tools/esp32ulp-elf/2.35_20220830/esp32ulp-elf/bin:/home/elias/.espressif/tools/cmake/3.24.0/bin:/home/elias/.espressif/tools/openocd-esp32/v0.12.0-esp32-20230921/openocd-esp32/bin:/home/elias/.espressif/tools/ninja/1.11.1:/home/elias/.espressif/tools/esp-rom-elfs/20230320",
+    "idf.customExtraVars": {
+        "OPENOCD_SCRIPTS": "/home/elias/.espressif/tools/openocd-esp32/v0.12.0-esp32-20230921/openocd-esp32/share/openocd/scripts",
+        "ESP_ROM_ELF_DIR": "/home/elias/.espressif/tools/esp-rom-elfs/20230320/"
+    },
+    "idf.espIdfPath": "/home/elias/esp/v5.2.1/esp-idf",
+    "idf.openOcdConfigs": [
+        "board/esp32-wrover-kit-3.3v.cfg"
+    ],
+    "idf.port": "/dev/ttyUSB0",
+    "idf.pythonBinPath": "/home/elias/.espressif/python_env/idf5.2_py3.10_env/bin/python",
+    "idf.toolsPath": "/home/elias/.espressif",
+    "idf.flashType": "UART",
+    "files.associations": {
+        "task.h": "c",
+        "esp_log.h": "c",
+        "nvs_flash.h": "c",
+        "stdio.h": "c",
+        "esp_wifi.h": "c",
+        "freertos.h": "c",
+        "ota_tcp_server.h": "c",
+        "sys.h": "c",
+        "esp_ota_ops.h": "c",
+        "netdb.h": "c"
+    }
+}
