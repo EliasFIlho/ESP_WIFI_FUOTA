@@ -24,6 +24,9 @@
         "ota_tcp_server.h": "c",
         "sys.h": "c",
         "esp_ota_ops.h": "c",
-        "netdb.h": "c"
+        "netdb.h": "c",
+        "wifi.h": "c",
+        "ota_http.h": "c",
+        "esp_http_client.h": "c"
     }
 }
