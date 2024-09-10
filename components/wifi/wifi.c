@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "wifi.h"
-#include "ota_http.h"
+
 
 void wifi_event_handle(void *event_handler_arg, esp_event_base_t event_base, int32_t event_id, void *event_data)
 {
@@ -33,7 +33,6 @@ void wifi_ip_event_handler(void *event_handler_arg, esp_event_base_t event_base,
     {
     case IP_EVENT_STA_GOT_IP:
         ESP_LOGI("WIFI", "GOT IP");
-        init_ota_monitor();
         break;
 
     default:

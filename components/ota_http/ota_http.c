@@ -8,16 +8,13 @@ static char parsed_version[32];
 static int recv_len = 0;
 
 #define VERSION "1.0.0"
-#define HOST "10.109.49.78"
-#define PORT 8000
-#define END_POINT_VERSION "/ota_version"
-#define END_POINT_FIRMWARE "/ota_update"
+
 
 bool RUNNING_OTA = false;
 
-void init_ota_monitor(void)
+void init_ota_monitor(ota_http_t *http_config)
 {
-    xTaskCreate(ota_monitor_task, "OTA MONITOR", configMINIMAL_STACK_SIZE + 4096, NULL, tskIDLE_PRIORITY + 1, NULL);
+    xTaskCreate(ota_monitor_task, "OTA MONITOR", configMINIMAL_STACK_SIZE + 4096, (void *)http_config, tskIDLE_PRIORITY + 1, NULL);
 }
 
 bool parse_version_and_compare(const char *json_str, const char *current_version)
@@ -91,12 +88,20 @@ esp_err_t _http_handle(esp_http_client_event_t *evt)
     return ESP_OK;
 }
 
-void http_config_get_request(esp_http_client_config_t *conf, const char *host, int port, const char *end_point, bool evt)
+void http_config_get_request(esp_http_client_config_t *conf, ota_http_t *http_config, bool version, bool evt)
 {
+    ESP_LOGI(TAG, "Host: %s, Port: %d, EndPoint Firmware: %s, EndPoint Version: %s", http_config->host, http_config->port, http_config->end_point_firmware,http_config->end_point_version);
+    conf->host = http_config->host;
+    conf->port = http_config->port;
+    if (version)
+    {
 
-    conf->host = host;
-    conf->port = port;
-    conf->path = end_point;
+        conf->path = http_config->end_point_version;
+    }
+    else
+    {
+        conf->path = http_config->end_point_firmware;
+    }
     conf->method = HTTP_METHOD_GET;
     conf->transport_type = HTTP_TRANSPORT_OVER_TCP;
     if (evt)
@@ -107,7 +112,7 @@ void http_config_get_request(esp_http_client_config_t *conf, const char *host, i
 
 esp_err_t perfom_request(esp_http_client_config_t *config)
 {
-    ESP_LOGI(TAG, "Host: %s, Port: %d, Path: %s", config->host, config->port, config->path);
+    
     esp_http_client_handle_t client = esp_http_client_init(config);
     if (client == NULL)
     {
@@ -121,12 +126,12 @@ esp_err_t perfom_request(esp_http_client_config_t *config)
     return ESP_OK;
 }
 
-void perform_http_ota()
+void perform_http_ota(ota_http_t *http_config)
 {
     ESP_LOGI(TAG, "RUNNING OTA");
     esp_http_client_config_t config;
     memset(&config, 0, sizeof(esp_http_client_config_t));
-    http_config_get_request(&config, HOST, PORT, END_POINT_FIRMWARE, false);
+    http_config_get_request(&config, http_config, false, false);
 
     esp_https_ota_config_t ota_config = {
         .http_config = &config,
@@ -150,9 +155,10 @@ void perform_http_ota()
 void ota_monitor_task(void *pvParameters)
 {
     esp_log_level_set("*", ESP_LOG_VERBOSE);
+    ota_http_t *http_config = (ota_http_t *)pvParameters;
     esp_http_client_config_t config;
     memset(&config, 0, sizeof(esp_http_client_config_t));
-    http_config_get_request(&config, HOST, PORT, END_POINT_VERSION, true);
+    http_config_get_request(&config, http_config, true,true);
     perfom_request(&config);
     while (1)
     {
@@ -160,7 +166,7 @@ void ota_monitor_task(void *pvParameters)
         perfom_request(&config);
         if (RUNNING_OTA)
         {
-            perform_http_ota();
+            perform_http_ota(http_config);
         }
         vTaskDelay(10000 / portTICK_PERIOD_MS);
     }
