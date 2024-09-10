@@ -52,8 +52,8 @@ void wifi_init_sta()
 
     wifi_config_t wifi = {
         .sta = {
-            .ssid = "Automacao",
-            .password = "9xg14230pD",
+            .ssid = CONFIG_ESP_WIFI_SSID,
+            .password = CONFIG_ESP_WIFI_PASSWORD,
             .threshold.authmode = WIFI_AUTH_WPA2_PSK,
         },
     };

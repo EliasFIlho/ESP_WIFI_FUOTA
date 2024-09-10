@@ -42,7 +42,7 @@ void app_main(void)
 
     while (1)
     {
-        // gpio_set_level(2,1);
+        gpio_set_level(2,1);
         // vTaskDelay(100 / portTICK_PERIOD_MS);
         // gpio_set_level(2,0);
         vTaskDelay(100 / portTICK_PERIOD_MS);
