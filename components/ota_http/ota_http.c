@@ -8,6 +8,12 @@ static char parsed_version[32];
 static int recv_len = 0;
 
 #define VERSION "1.0.0"
+#define HOST "10.109.49.78"
+#define PORT 8000
+#define END_POINT_VERSION "/ota_version"
+#define END_POINT_FIRMWARE "/ota_update"
+
+bool RUNNING_OTA = false;
 
 void init_ota_monitor(void)
 {
@@ -65,68 +71,97 @@ esp_err_t _http_handle(esp_http_client_event_t *evt)
             recv_len = evt->data_len;
         }
         ESP_LOGI(TAG, "DATA: %s", version_buffer);
-        if (parse_version_and_compare(version_buffer, "1.0.0"))
+        if (parse_version_and_compare(version_buffer, VERSION))
         {
             ESP_LOGI(TAG, "VERSION: EQUAL");
+            ESP_LOGI(TAG, "CURRENT VERSION: %s", VERSION);
+            RUNNING_OTA = false;
         }
         else
         {
             ESP_LOGI(TAG, "VERSION: DIFFERENT\nRunning OTA");
-            esp_http_client_config_t config = {
-                .host = "10.109.49.78",
-                .port = 8000,
-                .path = "/ota_update",
-            };
-            esp_https_ota_config_t ota_config = {
-                .http_config = &config,
-            };
-            esp_err_t ret = esp_https_ota(&ota_config);
-            if (ret == ESP_OK)
-            {
-                esp_restart();
-            }
+            ESP_LOGI(TAG, "CURRENT VERSION: %s", VERSION);
+            RUNNING_OTA = true;
         }
         break;
     default:
+        ESP_LOGI(TAG, "DEFAULT EVENT HANDLE");
         break;
     }
     return ESP_OK;
 }
 
-esp_err_t get_request()
+void http_config_get_request(esp_http_client_config_t *conf, const char *host, int port, const char *end_point, bool evt)
 {
-    esp_http_client_config_t config = {
-        .host = "10.109.49.78",
-        .port = 8000,
-        .path = "/ota_version",
-        .method = HTTP_METHOD_GET,
-        .transport_type = HTTP_TRANSPORT_OVER_TCP,
-        .event_handler = _http_handle};
 
-    esp_http_client_handle_t client = esp_http_client_init(&config);
-    if (client != NULL)
+    conf->host = host;
+    conf->port = port;
+    conf->path = end_point;
+    conf->method = HTTP_METHOD_GET;
+    conf->transport_type = HTTP_TRANSPORT_OVER_TCP;
+    if (evt)
     {
-        esp_err_t ret = esp_http_client_perform(client);
-        esp_http_client_cleanup(client);
-        return ESP_OK;
+        conf->event_handler = _http_handle;
+    }
+}
+
+esp_err_t perfom_request(esp_http_client_config_t *config)
+{
+    ESP_LOGI(TAG, "Host: %s, Port: %d, Path: %s", config->host, config->port, config->path);
+    esp_http_client_handle_t client = esp_http_client_init(config);
+    if (client == NULL)
+    {
+        return ESP_FAIL;
     }
     else
     {
-        ESP_LOGE(TAG, "ERROR TO INIT CLIENT");
-        return ESP_FAIL;
+        ESP_RETURN_ON_ERROR(esp_http_client_perform(client), TAG, "Failed to perform request");
+        ESP_RETURN_ON_ERROR(esp_http_client_cleanup(client), TAG, "Failed to perform cleanup");
+    }
+    return ESP_OK;
+}
+
+void perform_http_ota()
+{
+    ESP_LOGI(TAG, "RUNNING OTA");
+    esp_http_client_config_t config;
+    memset(&config, 0, sizeof(esp_http_client_config_t));
+    http_config_get_request(&config, HOST, PORT, END_POINT_FIRMWARE, false);
+
+    esp_https_ota_config_t ota_config = {
+        .http_config = &config,
+    };
+    esp_err_t ret = esp_https_ota(&ota_config);
+
+    if (ret == ESP_OK)
+    {
+        esp_restart();
+    }
+    else
+    {
+        ESP_LOGE(TAG, "OTA FAILS");
+        if (ret != ESP_OK)
+        {
+            ESP_LOGE(TAG, "OTA Failed with error code: %d", ret);
+        }
     }
 }
 
 void ota_monitor_task(void *pvParameters)
 {
     esp_log_level_set("*", ESP_LOG_VERBOSE);
-
-    ESP_LOGI(TAG, "Start loop");
+    esp_http_client_config_t config;
+    memset(&config, 0, sizeof(esp_http_client_config_t));
+    http_config_get_request(&config, HOST, PORT, END_POINT_VERSION, true);
+    perfom_request(&config);
     while (1)
     {
-        ESP_LOGI(TAG, "CURRENT VERSION: %s", VERSION);
-        ESP_ERROR_CHECK(get_request());
 
+        perfom_request(&config);
+        if (RUNNING_OTA)
+        {
+            perform_http_ota();
+        }
         vTaskDelay(10000 / portTICK_PERIOD_MS);
     }
 }
