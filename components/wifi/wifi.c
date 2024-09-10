@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "wifi.h"
 
-
 void wifi_event_handle(void *event_handler_arg, esp_event_base_t event_base, int32_t event_id, void *event_data)
 {
     switch (event_id)
