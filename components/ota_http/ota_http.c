@@ -4,11 +4,9 @@
 
 static const char *TAG = "OTA_MONITOR";
 static char version_buffer[128];
-static char parsed_version[32];
 static int recv_len = 0;
 
 #define VERSION "1.0.0"
-
 
 bool RUNNING_OTA = false;
 
@@ -17,43 +15,54 @@ void init_ota_monitor(ota_http_t *http_config)
     xTaskCreate(ota_monitor_task, "OTA MONITOR", configMINIMAL_STACK_SIZE + 4096, (void *)http_config, tskIDLE_PRIORITY + 1, NULL);
 }
 
-bool parse_version_and_compare(const char *json_str, const char *current_version)
+esp_err_t parse_json(const char *json_str, char *version_buffer, size_t version_buffer_size)
 {
+    cJSON *json = cJSON_Parse(json_str);
 
-    const char *version_key = "\"version\":\"";
-    char *version_start = strstr(json_str, version_key);
-
-    if (version_start != NULL)
+    if (json == NULL)
     {
-        version_start += strlen(version_key);
-        char *version_end = strchr(version_start, '"');
-
-        if (version_end != NULL)
+        const char *error_ptr = cJSON_GetErrorPtr();
+        if (error_ptr != NULL)
         {
-            size_t version_len = version_end - version_start;
-            strncpy(parsed_version, version_start, version_len);
-            parsed_version[version_len] = '\0';
-            int comp = strcmp(parsed_version, current_version);
-            if (comp == 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            ESP_LOGE(TAG, "Error: %s\n", error_ptr);
         }
-        else
-        {
-            ESP_LOGE(TAG, "Failed to find end of version string");
-            return false;
-        }
+        cJSON_Delete(json);
+        return ESP_FAIL;
     }
     else
     {
-        ESP_LOGE(TAG, "Failed to find version key");
+        cJSON *name = cJSON_GetObjectItemCaseSensitive(json, "version");
+        if (cJSON_IsString(name) && (name->valuestring != NULL))
+        {
+            ESP_LOGI(TAG, "Name: %s\n", name->valuestring);
+            if (version_buffer_size <= strlen(name->valuestring))
+            {
+
+                ESP_LOGE(TAG, "Error: Buffer smaller than data\n");
+                cJSON_Delete(json);
+                return ESP_FAIL;
+            }
+
+            strncpy(version_buffer, name->valuestring, strlen(name->valuestring) - 1);
+            version_buffer[strlen(name->valuestring)] = '\0';
+        }
     }
-    return false;
+    cJSON_Delete(json);
+    return ESP_OK;
+}
+
+bool compare_version(const char *version_to_compare, const char *current_version)
+{
+
+    int comp = strcmp(version_to_compare, current_version);
+    if (comp == 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 esp_err_t _http_handle(esp_http_client_event_t *evt)
@@ -67,8 +76,11 @@ esp_err_t _http_handle(esp_http_client_event_t *evt)
             memcpy(version_buffer, evt->data, evt->data_len);
             recv_len = evt->data_len;
         }
-        ESP_LOGI(TAG, "DATA: %s", version_buffer);
-        if (parse_version_and_compare(version_buffer, VERSION))
+        char version[15];
+        parse_json(version_buffer, version, 15);
+        ESP_LOGI(TAG, "DATA: %s", version);
+
+        if (compare_version(version, VERSION))
         {
             ESP_LOGI(TAG, "VERSION: EQUAL");
             ESP_LOGI(TAG, "CURRENT VERSION: %s", VERSION);
@@ -90,7 +102,7 @@ esp_err_t _http_handle(esp_http_client_event_t *evt)
 
 void http_config_get_request(esp_http_client_config_t *conf, ota_http_t *http_config, bool version, bool evt)
 {
-    ESP_LOGI(TAG, "Host: %s, Port: %d, EndPoint Firmware: %s, EndPoint Version: %s", http_config->host, http_config->port, http_config->end_point_firmware,http_config->end_point_version);
+    ESP_LOGI(TAG, "Host: %s, Port: %d, EndPoint Firmware: %s, EndPoint Version: %s", http_config->host, http_config->port, http_config->end_point_firmware, http_config->end_point_version);
     conf->host = http_config->host;
     conf->port = http_config->port;
     if (version)
@@ -112,7 +124,7 @@ void http_config_get_request(esp_http_client_config_t *conf, ota_http_t *http_co
 
 esp_err_t perfom_request(esp_http_client_config_t *config)
 {
-    
+
     esp_http_client_handle_t client = esp_http_client_init(config);
     if (client == NULL)
     {
@@ -158,7 +170,7 @@ void ota_monitor_task(void *pvParameters)
     ota_http_t *http_config = (ota_http_t *)pvParameters;
     esp_http_client_config_t config;
     memset(&config, 0, sizeof(esp_http_client_config_t));
-    http_config_get_request(&config, http_config, true,true);
+    http_config_get_request(&config, http_config, true, true);
     perfom_request(&config);
     while (1)
     {
