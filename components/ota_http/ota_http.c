@@ -7,6 +7,7 @@ static char version_buffer[128];
 static int recv_len = 0;
 
 #define VERSION "1.0.0"
+#define VERSION_KEY "version"
 
 bool RUNNING_OTA = false;
 
@@ -31,7 +32,7 @@ esp_err_t parse_json(const char *json_str, char *version_buffer, size_t version_
     }
     else
     {
-        cJSON *name = cJSON_GetObjectItemCaseSensitive(json, "version");
+        cJSON *name = cJSON_GetObjectItemCaseSensitive(json, VERSION_KEY);
         if (cJSON_IsString(name) && (name->valuestring != NULL))
         {
             ESP_LOGI(TAG, "Name: %s\n", name->valuestring);
@@ -43,8 +44,7 @@ esp_err_t parse_json(const char *json_str, char *version_buffer, size_t version_
                 return ESP_FAIL;
             }
 
-            strncpy(version_buffer, name->valuestring, strlen(name->valuestring) - 1);
-            version_buffer[strlen(name->valuestring)] = '\0';
+            strncpy(version_buffer, name->valuestring, strlen(name->valuestring));
         }
     }
     cJSON_Delete(json);
@@ -94,7 +94,7 @@ esp_err_t _http_handle(esp_http_client_event_t *evt)
         }
         break;
     default:
-        ESP_LOGI(TAG, "DEFAULT EVENT HANDLE");
+        //ESP_LOGI(TAG, "DEFAULT EVENT HANDLE");
         break;
     }
     return ESP_OK;

@@ -2,6 +2,8 @@
 #include "nvs_flash.h"
 #include "ota_http.h"
 #include "driver/gpio.h"
+#include "web_server.h"
+
 #define PORT 8000
 #define END_POINT_VERSION "/ota_version"
 #define END_POINT_FIRMWARE "/ota_update"
@@ -37,6 +39,7 @@ void app_main(void)
 
 
     init_ota_monitor(&teste);
+    init_http_server();
     
 
     while (1)
