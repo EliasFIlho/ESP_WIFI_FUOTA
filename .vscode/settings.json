@@ -31,6 +31,7 @@
         "cjson.h": "c",
         "esp_check.h": "c",
         "gpio.h": "c",
-        "web_server.h": "c"
+        "web_server.h": "c",
+        "filesystem.h": "c"
     }
 }

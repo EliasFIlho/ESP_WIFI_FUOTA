@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "web_server.h"
 #include "esp_log.h"
+#include "filesystem.h"
+
 
 #define RESP_LEN 16
 const char *TAG = "WEB SERVER [+]";
@@ -19,21 +21,26 @@ void init_http_server()
 esp_err_t get_handler(httpd_req_t *req)
 {
     const char resp[] = "URI GET Response";
-    ESP_LOGI(TAG,"%s",resp);
+    ESP_LOGI(TAG, "%s", resp);
+    init_file_system();
+
     httpd_resp_send(req, resp, RESP_LEN);
     return ESP_OK;
 }
 
 httpd_uri_t uri_get = {
-    .uri = "/",
-    .method = HTTP_GET,
-    .handler = get_handler,
-    .user_ctx = NULL};
+        .uri = "/",
+        .method = HTTP_GET,
+        .handler = get_handler,
+        .user_ctx = NULL};
+    
+
 
 httpd_handle_t start_webserver(void)
 {
+    
+    
     httpd_config_t config = HTTPD_DEFAULT_CONFIG();
-
     httpd_handle_t server = NULL;
 
     if (httpd_start(&server, &config) == ESP_OK)
