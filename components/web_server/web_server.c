@@ -18,13 +18,11 @@ void init_http_server()
     ESP_LOGI(TAG, "SERVER STARTED");
 }
 
-
 httpd_uri_t uri_get = {
     .uri = "/",
     .method = HTTP_GET,
     .handler = root_get_handler,
     .user_ctx = NULL};
-
 
 httpd_uri_t uri_post = {
     .uri = "/authentication",
@@ -32,6 +30,11 @@ httpd_uri_t uri_post = {
     .handler = authentication_post_handler,
     .user_ctx = NULL};
 
+httpd_uri_t config_endpoint_get = {
+    .uri = "/config",
+    .method = HTTP_GET,
+    .handler = config_get_handler,
+    .user_ctx = NULL};
 
 httpd_handle_t start_webserver(void)
 {
@@ -44,7 +47,8 @@ httpd_handle_t start_webserver(void)
     if (httpd_start(&server, &config) == ESP_OK)
     {
         httpd_register_uri_handler(server, &uri_get);
-        httpd_register_uri_handler(server,&uri_post);
+        httpd_register_uri_handler(server, &uri_post);
+        httpd_register_uri_handler(server, &config_endpoint_get);
     }
     return server;
 }
