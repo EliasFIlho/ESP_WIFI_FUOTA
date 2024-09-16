@@ -2,7 +2,7 @@
 #include "web_server.h"
 #include "esp_log.h"
 #include "filesystem.h"
-
+#include "handles.h"
 
 #define RESP_LEN 16
 const char *TAG = "WEB SERVER [+]";
@@ -18,34 +18,33 @@ void init_http_server()
     ESP_LOGI(TAG, "SERVER STARTED");
 }
 
-esp_err_t get_handler(httpd_req_t *req)
-{
-    const char resp[] = "URI GET Response";
-    ESP_LOGI(TAG, "%s", resp);
-    init_file_system();
-
-    httpd_resp_send(req, resp, RESP_LEN);
-    return ESP_OK;
-}
 
 httpd_uri_t uri_get = {
-        .uri = "/",
-        .method = HTTP_GET,
-        .handler = get_handler,
-        .user_ctx = NULL};
-    
+    .uri = "/",
+    .method = HTTP_GET,
+    .handler = root_get_handler,
+    .user_ctx = NULL};
+
+
+httpd_uri_t uri_post = {
+    .uri = "/authentication",
+    .method = HTTP_POST,
+    .handler = authentication_post_handler,
+    .user_ctx = NULL};
 
 
 httpd_handle_t start_webserver(void)
 {
-    
-    
+
     httpd_config_t config = HTTPD_DEFAULT_CONFIG();
     httpd_handle_t server = NULL;
+    config.stack_size = 8192;
+    init_file_system();
 
     if (httpd_start(&server, &config) == ESP_OK)
     {
         httpd_register_uri_handler(server, &uri_get);
+        httpd_register_uri_handler(server,&uri_post);
     }
     return server;
 }

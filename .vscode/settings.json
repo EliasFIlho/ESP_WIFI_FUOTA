@@ -32,6 +32,11 @@
         "esp_check.h": "c",
         "gpio.h": "c",
         "web_server.h": "c",
-        "filesystem.h": "c"
+        "filesystem.h": "c",
+        "array": "c",
+        "string": "c",
+        "string_view": "c",
+        "span": "c",
+        "handles.h": "c"
     }
 }

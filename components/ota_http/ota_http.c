@@ -180,6 +180,6 @@ void ota_monitor_task(void *pvParameters)
         {
             perform_http_ota(http_config);
         }
-        vTaskDelay(10000 / portTICK_PERIOD_MS);
+        vTaskDelay(500000 / portTICK_PERIOD_MS);
     }
 }
