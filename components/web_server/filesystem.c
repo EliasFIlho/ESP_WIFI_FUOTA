@@ -55,34 +55,29 @@ void read_file_as_str(const char *file_name, char *buffer, size_t buffer_size)
 
 esp_err_t write_config_file(device_cfg_t *dev)
 {
+    cJSON *json = cJSON_CreateObject();
+
+    cJSON_AddStringToObject(json, "DEVICE_NAME", dev->device_name);
+    cJSON_AddStringToObject(json, "DEVICE_IP", dev->device_ip);
+    cJSON_AddStringToObject(json, "SERVER_IP", dev->server_ip);
+    cJSON_AddNumberToObject(json, "PORT", dev->port);
+    cJSON_AddNumberToObject(json, "SAMPLE_TIME", dev->sample_time);
+    cJSON_AddNumberToObject(json, "IO_1_CONFIG", dev->io_01);
+    cJSON_AddNumberToObject(json, "IO_2_CONFIG", dev->io_02);
+    cJSON_AddNumberToObject(json, "IO_3_CONFIG", dev->io_03);
+    cJSON_AddNumberToObject(json, "IO_4_CONFIG", dev->io_04);
+
+    char *config_file = cJSON_Print(json);
 
     FILE *p = fopen("/spiffs/device.cfg", "w");
-    if (p != NULL)
-    {
-        ESP_LOGI("SPIFFS", "OPENED");
-        fprintf(p, "DEVICE_NAME=%s\n", dev->device_name);
-        fprintf(p, "DEVICE_IP=%s\n", dev->device_ip);
-        fprintf(p, "SERVER_IP=%s\n", dev->server_ip);
-        fprintf(p, "PORT=%d\n", dev->port);
-        fprintf(p, "SAMPLE_TIME=%d\n", dev->sample_time);
-        fprintf(p, "IO_1_CONFIG=%d\n", dev->io_01);
-        fprintf(p, "IO_2_CONFIG=%d\n", dev->io_02);
-        fprintf(p, "IO_3_CONFIG=%d\n", dev->io_03);
-        fprintf(p, "IO_4_CONFIG=%d\n", dev->io_04);
-    }
-    else
+    if (p == NULL)
     {
         ESP_LOGE("SPIFFS", "FAIL TO OPEN");
-        fclose(p);
         return ESP_FAIL;
     }
+
+    fprintf(p, "%s", config_file);
     fclose(p);
-    char config[500];
-    read_file_as_str("device.cfg",config, sizeof(config));
-    ESP_LOGW("TESTE","READED FILE: %s",config);
-
-
-
     return ESP_OK;
 }
 

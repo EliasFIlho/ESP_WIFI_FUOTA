@@ -38,7 +38,7 @@ httpd_uri_t config_endpoint_get = {
     .uri = "/config",
     .method = HTTP_GET,
     .handler = config_get_handler,
-    .user_ctx = NULL};
+    .user_ctx = NULL,};
 
 httpd_uri_t config_endpoint_post = {
     .uri = "/config",
