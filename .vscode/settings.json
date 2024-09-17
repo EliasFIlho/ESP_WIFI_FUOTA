@@ -37,6 +37,7 @@
         "string": "c",
         "string_view": "c",
         "span": "c",
-        "handles.h": "c"
+        "handles.h": "c",
+        "stdint.h": "c"
     }
 }
