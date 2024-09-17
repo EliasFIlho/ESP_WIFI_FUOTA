@@ -54,14 +54,105 @@ void parse_config_body(char *content, device_cfg_t *config_structure)
     char *key;
     char *data;
 
-    for (int i = 0; i < CONFIG_TOKENS_NUMBER; i++)
+    for (int i = 0; i < counter; i++)
     {
         key = strtok(TOKENS[i], "=");
         data = strtok(NULL, "=");
         ESP_LOGI("TOKENS ARRAY: ", "KEY[%s] - DATA[%s]\n", key, data);
-        if (strcmp(key, "device_name")==0)
+        if (strcmp(key, "device_name") == 0)
         {
-            ESP_LOGW("TOKENS: ", "NICE");
+            ESP_LOGW("TOKENS: ", "NICE NAME: %s", data);
+            size_t len = strlen(data);
+            strncpy(config_structure->device_name, data, len);
+            config_structure->device_name[len] = '\0';
+        }
+        else if (strcmp(key, "ip_address") == 0)
+        {
+            ESP_LOGW("TOKENS: ", "NICE IP: %s", data);
+            size_t len = strlen(data);
+            strncpy(config_structure->device_ip, data, len);
+            config_structure->device_ip[len] = '\0';
+        }
+        else if (strcmp(key, "server_ip") == 0)
+        {
+            ESP_LOGW("TOKENS: ", "NICE SERVER IP: %s", data);
+            size_t len = strlen(data);
+            strncpy(config_structure->server_ip, data, len);
+            config_structure->server_ip[len] = '\0';
+        }
+        else if (strcmp(key, "port") == 0)
+        {
+            ESP_LOGW("TOKENS: ", "NICE PORT: %d", atoi(data));
+            config_structure->port = atoi(data);
+        }
+        else if (strcmp(key, "sampling_interval") == 0)
+        {
+            ESP_LOGW("TOKENS: ", "NICE sample interval: %d", atoi(data));
+            config_structure->sample_time = atoi(data);
+        }
+        else if (strcmp(key, "io_pin_1") == 0)
+        {
+            ESP_LOGW("TOKENS: ", "NICE IO PIN SELECT 1: %s", data);
+            if (strcmp(data, "on_off") == 0)
+            {
+                config_structure->io_01 = ON_OFF;
+            }
+            else if (strcmp(data, "pulse_counter") == 0)
+            {
+                config_structure->io_01 = PULSE_COUNTER;
+            }
+            else
+            {
+                config_structure->io_01 = DISABLE;
+            }
+        }
+        else if (strcmp(key, "io_pin_2") == 0)
+        {
+            ESP_LOGW("TOKENS: ", "NICE IO PIN SELECT 2: %s", data);
+            if (strcmp(data, "on_off") == 0)
+            {
+                config_structure->io_02 = ON_OFF;
+            }
+            else if (strcmp(data, "pulse_counter") == 0)
+            {
+                config_structure->io_02 = PULSE_COUNTER;
+            }
+            else
+            {
+                config_structure->io_02 = DISABLE;
+            }
+        }
+        else if (strcmp(key, "io_pin_3") == 0)
+        {
+            ESP_LOGW("TOKENS: ", "NICE IO PIN SELECT 3: %s", data);
+            if (strcmp(data, "on_off") == 0)
+            {
+                config_structure->io_03 = ON_OFF;
+            }
+            else if (strcmp(data, "pulse_counter") == 0)
+            {
+                config_structure->io_03 = PULSE_COUNTER;
+            }
+            else
+            {
+                config_structure->io_03 = DISABLE;
+            }
+        }
+        else if (strcmp(key, "io_pin_4") == 0)
+        {
+            ESP_LOGW("TOKENS: ", "NICE IO PIN SELECT 4: %s", data);
+            if (strcmp(data, "on_off") == 0)
+            {
+                config_structure->io_04 = ON_OFF;
+            }
+            else if (strcmp(data, "pulse_counter") == 0)
+            {
+                config_structure->io_04 = PULSE_COUNTER;
+            }
+            else
+            {
+                config_structure->io_04 = DISABLE;
+            }
         }
     }
 }

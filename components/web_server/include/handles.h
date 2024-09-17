@@ -18,6 +18,7 @@ typedef enum {
 typedef struct {
     char device_name[10];
     char device_ip[16];
+    char server_ip[16];
     int port;
     int sample_time;
     io_set_t io_01;
