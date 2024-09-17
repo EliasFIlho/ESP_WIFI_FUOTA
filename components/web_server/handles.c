@@ -147,8 +147,16 @@ esp_err_t config_post_handler(httpd_req_t *req)
     read_file_as_str("login.html", page, 3000);
     esp_err_t ret = httpd_resp_send(req, page, HTTPD_RESP_USE_STRLEN);
     device_cfg_t dev;
-    parse_config_body(content, &dev);
-    ESP_LOGI("CONFIG HANDLE", "NAME[%s]\nDEV_IP[%s]\nSERVER_IP[%s]\nPORT[%d]\nSAMPLE[%d]\nIO_1[%d]\nIO_2[%d]\nIO_3[%d]\nIO_4[%d]",dev.device_name,dev.device_ip,dev.server_ip,dev.port,dev.sample_time,dev.io_01,dev.io_02,dev.io_03,dev.io_04);
+    ret = parse_config_body(content, &dev);
+    if (ret != ESP_OK)
+    {
+        return ret;
+    }
+    else
+    {
+        ESP_LOGI("CONFIG HANDLE", "NAME[%s]\nDEV_IP[%s]\nSERVER_IP[%s]\nPORT[%d]\nSAMPLE[%d]\nIO_1[%d]\nIO_2[%d]\nIO_3[%d]\nIO_4[%d]", dev.device_name, dev.device_ip, dev.server_ip, dev.port, dev.sample_time, dev.io_01, dev.io_02, dev.io_03, dev.io_04);
+        ret = write_config_file(&dev);
+    }
 
     return ret;
 }
