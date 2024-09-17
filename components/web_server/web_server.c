@@ -18,6 +18,10 @@ void init_http_server()
     ESP_LOGI(TAG, "SERVER STARTED");
 }
 
+
+
+//End points structures
+
 httpd_uri_t uri_get = {
     .uri = "/",
     .method = HTTP_GET,
@@ -36,6 +40,15 @@ httpd_uri_t config_endpoint_get = {
     .handler = config_get_handler,
     .user_ctx = NULL};
 
+httpd_uri_t config_endpoint_post = {
+    .uri = "/config",
+    .method = HTTP_POST,
+    .handler = config_post_handler,
+    .user_ctx = NULL};
+
+
+
+
 httpd_handle_t start_webserver(void)
 {
 
@@ -49,6 +62,7 @@ httpd_handle_t start_webserver(void)
         httpd_register_uri_handler(server, &uri_get);
         httpd_register_uri_handler(server, &uri_post);
         httpd_register_uri_handler(server, &config_endpoint_get);
+        httpd_register_uri_handler(server, &config_endpoint_post);
     }
     return server;
 }

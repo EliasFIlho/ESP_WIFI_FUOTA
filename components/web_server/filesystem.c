@@ -58,7 +58,7 @@ esp_err_t read_file_as_str_chunked(const char *file_name, char *buffer, size_t b
     const char *TAG = "SPIFFS [+]";
     char file_path[256];
     snprintf(file_path, sizeof(file_path), "%s%s", "/spiffs/", file_name);
-    ESP_LOGI(TAG, "File path: %s", file_path);
+    //ESP_LOGI(TAG, "File path: %s", file_path);
     FILE *p = fopen(file_path, "r");
     
     if (p == NULL)
@@ -75,7 +75,7 @@ esp_err_t read_file_as_str_chunked(const char *file_name, char *buffer, size_t b
             ESP_LOGW(TAG,"End of file");
             return ESP_OK;
         }
-        ESP_LOGI(TAG, "File content: %s", buffer);
+       //ESP_LOGI(TAG, "File content: %s", buffer);
     }else{
         ESP_LOGE(TAG,"fgets return NULL");
     }
