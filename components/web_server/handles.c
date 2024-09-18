@@ -6,7 +6,7 @@ esp_err_t root_get_handler(httpd_req_t *req)
     const char resp[] = "URI GET Response";
     ESP_LOGI(TAG, "%s", resp);
     char page[4096];
-    read_file_as_str("login.html", page, 4096);
+    read_file_as_str("login.html", page, sizeof(page));
     httpd_resp_send(req, page, strlen(page));
     return ESP_OK;
 }
@@ -33,7 +33,7 @@ esp_err_t config_get_handler(httpd_req_t *req)
     return ESP_OK;
 }
 
-io_set_t io_config_parse(char *data)
+io_set_t io_config_comp(char *data)
 {
     if (strcmp(data, "on_off") == 0)
     {
@@ -49,92 +49,61 @@ io_set_t io_config_parse(char *data)
     }
 }
 
+void validate_and_assing(char *dest, size_t dest_size, const char *key, cJSON *json)
+{
+    cJSON *data;
+    data = cJSON_GetObjectItemCaseSensitive(json, key);
+    if (cJSON_IsString(data) && (data->valuestring != NULL))
+    {
+        snprintf(dest, dest_size, data->valuestring);
+    }
+}
+
+void validate_and_assing_atoi(int *dest, const char *key, cJSON *json)
+{
+    cJSON *data;
+    data = cJSON_GetObjectItemCaseSensitive(json, key);
+    if (cJSON_IsString(data) && (data->valuestring != NULL))
+    {
+        *dest = atoi(data->valuestring);
+    }
+}
+
+void validate_and_assing_io(io_set_t *dest, const char *key, cJSON *json)
+{
+    cJSON *data;
+    data = cJSON_GetObjectItemCaseSensitive(json, key);
+    if (cJSON_IsString(data) && (data->valuestring != NULL))
+    {
+        *dest = io_config_comp(data->valuestring);
+    }
+}
+
 esp_err_t parse_config_body(char *content, device_cfg_t *config_structure)
 {
-
-    char *token;
-    char TOKENS[CONFIG_TOKENS_NUMBER][CONFIG_TOKENS_SIZE];
-    int counter = 0;
-    token = strtok(content, "&");
-    size_t token_size;
-    while (token != NULL)
+    cJSON *json = cJSON_Parse(content);
+    if (json == NULL)
     {
-        token_size = strlen(token);
-        strncpy(TOKENS[counter], token, token_size);
-        TOKENS[counter][token_size] = '\0';
-        counter++;
-        token = strtok(NULL, "&");
+        const char *error_ptr = cJSON_GetErrorPtr();
+        if (error_ptr != NULL)
+        {
+            ESP_LOGE("PARSER", "Error: %s\n", error_ptr);
+        }
+        cJSON_Delete(json);
+        return ESP_FAIL;
     }
 
-    if (counter > CONFIG_TOKENS_NUMBER)
-    {
-        return ESP_ERR_INVALID_SIZE;
-    }
-    char *key;
-    char *data;
-    for (int i = 0; i < counter; i++)
-    {
-        key = strtok(TOKENS[i], "=");
-        data = strtok(NULL, "=");
-        // ESP_LOGI("TOKENS ARRAY: ", "KEY[%s] - DATA[%s]\n", key, data);
+    validate_and_assing(config_structure->device_name, sizeof(config_structure->device_name), "device_name", json);
+    validate_and_assing(config_structure->device_ip, sizeof(config_structure->device_ip), "ip_address", json);
+    validate_and_assing(config_structure->server_ip, sizeof(config_structure->server_ip), "server_ip", json);
+    validate_and_assing_atoi(&config_structure->port, "port", json);
+    validate_and_assing_atoi(&config_structure->sample_time, "sampling_interval", json);
+    validate_and_assing_io(&config_structure->io_01,"io_pin_1",json);
+    validate_and_assing_io(&config_structure->io_02,"io_pin_2",json);
+    validate_and_assing_io(&config_structure->io_03,"io_pin_3",json);
+    validate_and_assing_io(&config_structure->io_04,"io_pin_4",json);
+    cJSON_Delete(json);
 
-        if (strcmp(key, "device_name") == 0)
-        {
-            int writed = snprintf(config_structure->device_name, sizeof(config_structure->device_name), "%s", data);
-            int ret = EQUAL(writed, strlen(data));
-            if (ret != 0)
-            {
-                ESP_LOGW("PARSER", "INVALIDE\nWRITED[%d]  DATA[%d]\nFunction return[%d]", writed, strlen(data), ret);
-                return ESP_FAIL;
-            }
-        }
-        else if (strcmp(key, "ip_address") == 0)
-        {
-            int writed = snprintf(config_structure->device_ip, sizeof(config_structure->device_ip), "%s", data);
-            int ret = EQUAL(writed, strlen(data));
-            if (ret != 0)
-            {
-                ESP_LOGW("PARSER", "INVALIDE\nWRITED[%d]  DATA[%d]\nFunction return[%d]", writed, strlen(data), ret);
-                return ESP_FAIL;
-            }
-        }
-        else if (strcmp(key, "server_ip") == 0)
-        {
-            int writed = snprintf(config_structure->server_ip, sizeof(config_structure->server_ip), "%s", data);
-            int ret = EQUAL(writed, strlen(data));
-            if (ret != 0)
-            {
-                ESP_LOGW("PARSER", "INVALIDE\nWRITED[%d]  DATA[%d]\nFunction return[%d]", writed, strlen(data), ret);
-                return ESP_FAIL;
-            }
-        }
-        else if (strcmp(key, "port") == 0)
-        {
-            config_structure->port = atoi(data);
-        }
-        else if (strcmp(key, "sampling_interval") == 0)
-        {
-            config_structure->sample_time = atoi(data);
-        }
-        else if (strcmp(key, "io_pin_1") == 0)
-        {
-
-            config_structure->io_01 = io_config_parse(data);
-        }
-        else if (strcmp(key, "io_pin_2") == 0)
-        {
-
-            config_structure->io_02 = io_config_parse(data);
-        }
-        else if (strcmp(key, "io_pin_3") == 0)
-        {
-            config_structure->io_03 = io_config_parse(data);
-        }
-        else if (strcmp(key, "io_pin_4") == 0)
-        {
-            config_structure->io_04 = io_config_parse(data);
-        }
-    }
     return ESP_OK;
 }
 
@@ -144,9 +113,10 @@ esp_err_t config_post_handler(httpd_req_t *req)
     read_recv_data_as_string(req, content, sizeof(content));
     ESP_LOGI("RECV", "POST: %s", content);
     char page[3000];
-    read_file_as_str("login.html", page, 3000);
+    read_file_as_str("login.html", page, sizeof(page));
     esp_err_t ret = httpd_resp_send(req, page, HTTPD_RESP_USE_STRLEN);
     device_cfg_t dev;
+
     ret = parse_config_body(content, &dev);
     if (ret != ESP_OK)
     {

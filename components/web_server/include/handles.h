@@ -16,6 +16,7 @@ esp_err_t config_get_handler(httpd_req_t *req);
 esp_err_t read_file_as_str_chunked(const char *file_name, char *buffer, size_t buffer_size, long *position);
 esp_err_t config_post_handler(httpd_req_t *req);
 esp_err_t parse_config_body(char *content, device_cfg_t *config_structure);
-io_set_t io_config_parse(char *data);
-
-
+io_set_t io_config_comp(char *data);
+void validate_and_assing(char *dest, size_t dest_size,const char *key, cJSON *json);
+void validate_and_assing_atoi(int *dest,const char *key, cJSON *json);
+void validate_and_assing_io(io_set_t *dest, const char *key, cJSON *json);

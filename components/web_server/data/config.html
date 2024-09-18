@@ -72,7 +72,7 @@
 <body>
     <div class="container">
         <h2>Device Configuration</h2>
-        <form action="/config" method="POST">
+        <form id="config-form">
             <div class="form-group">
                 <label for="device-name">Device Name:</label>
                 <input type="text" id="device-name" name="device_name" required>
@@ -148,5 +148,48 @@
             <button type="submit">Save Configuration</button>
         </form>
     </div>
+
+    <script>
+        document.getElementById('config-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            // Gather form data
+            const formData = {
+                device_name: document.getElementById('device-name').value,
+                ip_address: document.getElementById('ip-address').value,
+                server_ip: document.getElementById('server-ip').value,
+                port: document.getElementById('port').value,
+                sampling_interval: document.getElementById('sampling-interval').value,
+                io_pin_1: document.querySelector('select[name="io_pin_1"]').value,
+                io_pin_2: document.querySelector('select[name="io_pin_2"]').value,
+                io_pin_3: document.querySelector('select[name="io_pin_3"]').value,
+                io_pin_4: document.querySelector('select[name="io_pin_4"]').value
+            };
+
+            // Send data to the server using fetch
+            fetch('/config', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Failed to save configuration');
+                }
+            })
+            .then(data => {
+                alert('Configuration saved successfully!');
+                console.log(data);
+            })
+            .catch(error => {
+                console.error(error);
+                alert('An error occurred: ' + error.message);
+            });
+        });
+    </script>
 </body>
 </html>
