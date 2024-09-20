@@ -1,0 +1,63 @@
+\doxysection{main/main.c File Reference}
+\hypertarget{main_8c}{}\label{main_8c}\index{main/main.c@{main/main.c}}
+{\ttfamily \#include "{}wifi.\+h"{}}\newline
+{\ttfamily \#include "{}nvs\+\_\+flash.\+h"{}}\newline
+{\ttfamily \#include "{}ota\+\_\+http.\+h"{}}\newline
+{\ttfamily \#include "{}driver/gpio.\+h"{}}\newline
+{\ttfamily \#include "{}web\+\_\+server.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{main_8c_a614217d263be1fb1a5f76e2ff7be19a2}{PORT}}~8000
+\item 
+\#define \mbox{\hyperlink{main_8c_ad9e34dc6d42627bf6ba9389762e7573e}{END\+\_\+\+POINT\+\_\+\+VERSION}}~"{}/ota\+\_\+version"{}
+\item 
+\#define \mbox{\hyperlink{main_8c_a00cb8c9a259460a788243ea002e431f5}{END\+\_\+\+POINT\+\_\+\+FIRMWARE}}~"{}/ota\+\_\+update"{}
+\item 
+\#define \mbox{\hyperlink{main_8c_abbbcf3c42c997889127cc676754a6fea}{HOST}}~"{}10.\+109.\+49.\+78"{}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8c_a630544a7f0a2cc40d8a7fefab7e2fe70}{app\+\_\+main}} (void)
+\begin{DoxyCompactList}\small\item\em Loop principal, inicializa o nvs e os gpio, logo em seguida o wifi. Após a inicialização do wifi, inicializa as tarefas do servidor web e do monitoramento ota. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{main_8c_a00cb8c9a259460a788243ea002e431f5}\index{main.c@{main.c}!END\_POINT\_FIRMWARE@{END\_POINT\_FIRMWARE}}
+\index{END\_POINT\_FIRMWARE@{END\_POINT\_FIRMWARE}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{END\_POINT\_FIRMWARE}{END\_POINT\_FIRMWARE}}
+{\footnotesize\ttfamily \label{main_8c_a00cb8c9a259460a788243ea002e431f5} 
+\#define END\+\_\+\+POINT\+\_\+\+FIRMWARE~"{}/ota\+\_\+update"{}}
+
+\Hypertarget{main_8c_ad9e34dc6d42627bf6ba9389762e7573e}\index{main.c@{main.c}!END\_POINT\_VERSION@{END\_POINT\_VERSION}}
+\index{END\_POINT\_VERSION@{END\_POINT\_VERSION}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{END\_POINT\_VERSION}{END\_POINT\_VERSION}}
+{\footnotesize\ttfamily \label{main_8c_ad9e34dc6d42627bf6ba9389762e7573e} 
+\#define END\+\_\+\+POINT\+\_\+\+VERSION~"{}/ota\+\_\+version"{}}
+
+\Hypertarget{main_8c_abbbcf3c42c997889127cc676754a6fea}\index{main.c@{main.c}!HOST@{HOST}}
+\index{HOST@{HOST}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{HOST}{HOST}}
+{\footnotesize\ttfamily \label{main_8c_abbbcf3c42c997889127cc676754a6fea} 
+\#define HOST~"{}10.\+109.\+49.\+78"{}}
+
+\Hypertarget{main_8c_a614217d263be1fb1a5f76e2ff7be19a2}\index{main.c@{main.c}!PORT@{PORT}}
+\index{PORT@{PORT}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{PORT}{PORT}}
+{\footnotesize\ttfamily \label{main_8c_a614217d263be1fb1a5f76e2ff7be19a2} 
+\#define PORT~8000}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8c_a630544a7f0a2cc40d8a7fefab7e2fe70}\index{main.c@{main.c}!app\_main@{app\_main}}
+\index{app\_main@{app\_main}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{app\_main()}{app\_main()}}
+{\footnotesize\ttfamily \label{main_8c_a630544a7f0a2cc40d8a7fefab7e2fe70} 
+void app\+\_\+main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Loop principal, inicializa o nvs e os gpio, logo em seguida o wifi. Após a inicialização do wifi, inicializa as tarefas do servidor web e do monitoramento ota. 
+

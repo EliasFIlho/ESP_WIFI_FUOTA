@@ -1,0 +1,41 @@
+\doxysection{components/web\+\_\+server/filesystem.c File Reference}
+\hypertarget{filesystem_8c}{}\label{filesystem_8c}\index{components/web\_server/filesystem.c@{components/web\_server/filesystem.c}}
+{\ttfamily \#include "{}filesystem.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{filesystem_8c_a31fa5fec2e8ef080df2ebe3c444ef358}{init\+\_\+file\+\_\+system}} ()
+\item 
+void \mbox{\hyperlink{filesystem_8c_ad6326b2d243a29a07b4bf280752ae62e}{read\+\_\+file\+\_\+as\+\_\+str}} (const char \texorpdfstring{$\ast$}{*}file\+\_\+name, char \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t buffer\+\_\+size)
+\item 
+esp\+\_\+err\+\_\+t \mbox{\hyperlink{filesystem_8c_a92dcd7688f971f328c106454984a33d4}{write\+\_\+config\+\_\+file}} (\mbox{\hyperlink{structdevice__cfg__t}{device\+\_\+cfg\+\_\+t}} \texorpdfstring{$\ast$}{*}dev)
+\item 
+esp\+\_\+err\+\_\+t \mbox{\hyperlink{filesystem_8c_a91b0ac5a0002d2948fe0c9c8d8347441}{read\+\_\+file\+\_\+as\+\_\+str\+\_\+chunked}} (const char \texorpdfstring{$\ast$}{*}file\+\_\+name, char \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t buffer\+\_\+size, long \texorpdfstring{$\ast$}{*}position)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{filesystem_8c_a31fa5fec2e8ef080df2ebe3c444ef358}\index{filesystem.c@{filesystem.c}!init\_file\_system@{init\_file\_system}}
+\index{init\_file\_system@{init\_file\_system}!filesystem.c@{filesystem.c}}
+\doxysubsubsection{\texorpdfstring{init\_file\_system()}{init\_file\_system()}}
+{\footnotesize\ttfamily \label{filesystem_8c_a31fa5fec2e8ef080df2ebe3c444ef358} 
+void init\+\_\+file\+\_\+system (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{filesystem_8c_ad6326b2d243a29a07b4bf280752ae62e}\index{filesystem.c@{filesystem.c}!read\_file\_as\_str@{read\_file\_as\_str}}
+\index{read\_file\_as\_str@{read\_file\_as\_str}!filesystem.c@{filesystem.c}}
+\doxysubsubsection{\texorpdfstring{read\_file\_as\_str()}{read\_file\_as\_str()}}
+{\footnotesize\ttfamily \label{filesystem_8c_ad6326b2d243a29a07b4bf280752ae62e} 
+void read\+\_\+file\+\_\+as\+\_\+str (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{file\+\_\+name}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{buffer\+\_\+size}{}\end{DoxyParamCaption})}
+
+\Hypertarget{filesystem_8c_a91b0ac5a0002d2948fe0c9c8d8347441}\index{filesystem.c@{filesystem.c}!read\_file\_as\_str\_chunked@{read\_file\_as\_str\_chunked}}
+\index{read\_file\_as\_str\_chunked@{read\_file\_as\_str\_chunked}!filesystem.c@{filesystem.c}}
+\doxysubsubsection{\texorpdfstring{read\_file\_as\_str\_chunked()}{read\_file\_as\_str\_chunked()}}
+{\footnotesize\ttfamily \label{filesystem_8c_a91b0ac5a0002d2948fe0c9c8d8347441} 
+esp\+\_\+err\+\_\+t read\+\_\+file\+\_\+as\+\_\+str\+\_\+chunked (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{file\+\_\+name}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{buffer\+\_\+size}{, }\item[{long \texorpdfstring{$\ast$}{*}}]{position}{}\end{DoxyParamCaption})}
+
+\Hypertarget{filesystem_8c_a92dcd7688f971f328c106454984a33d4}\index{filesystem.c@{filesystem.c}!write\_config\_file@{write\_config\_file}}
+\index{write\_config\_file@{write\_config\_file}!filesystem.c@{filesystem.c}}
+\doxysubsubsection{\texorpdfstring{write\_config\_file()}{write\_config\_file()}}
+{\footnotesize\ttfamily \label{filesystem_8c_a92dcd7688f971f328c106454984a33d4} 
+esp\+\_\+err\+\_\+t write\+\_\+config\+\_\+file (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structdevice__cfg__t}{device\+\_\+cfg\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{dev}{}\end{DoxyParamCaption})}
+

@@ -1,0 +1,55 @@
+\doxysection{components/web\+\_\+server/include/web\+\_\+server.h File Reference}
+\hypertarget{web__server_8h}{}\label{web__server_8h}\index{components/web\_server/include/web\_server.h@{components/web\_server/include/web\_server.h}}
+{\ttfamily \#include "{}esp\+\_\+http\+\_\+server.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+log.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+event.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{web__server_8h_ae7d6567c9aa9a23c2d63ed0b2ddf1a0f}{init\+\_\+http\+\_\+server}} ()
+\begin{DoxyCompactList}\small\item\em Função para iniciar o servidor web. \end{DoxyCompactList}\item 
+esp\+\_\+err\+\_\+t \mbox{\hyperlink{web__server_8h_a57a1d28e8246614b495bed50df98ceec}{get\+\_\+handler}} (httpd\+\_\+req\+\_\+t \texorpdfstring{$\ast$}{*}req)
+\item 
+httpd\+\_\+handle\+\_\+t \mbox{\hyperlink{web__server_8h_aa405dbf500a1f511f559e1e87efff9da}{start\+\_\+webserver}} (void)
+\begin{DoxyCompactList}\small\item\em Função interna para iniciar o servidor web. Associação de endpoints. Configuração de task. Inicialização do filesystem. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{web__server_8h_ab289ced6a1beb997e4a6be1f3c7a2530}{stop\+\_\+webserver}} (httpd\+\_\+handle\+\_\+t server)
+\begin{DoxyCompactList}\small\item\em Função interna para desligar o servidor web. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{web__server_8h_a57a1d28e8246614b495bed50df98ceec}\index{web\_server.h@{web\_server.h}!get\_handler@{get\_handler}}
+\index{get\_handler@{get\_handler}!web\_server.h@{web\_server.h}}
+\doxysubsubsection{\texorpdfstring{get\_handler()}{get\_handler()}}
+{\footnotesize\ttfamily \label{web__server_8h_a57a1d28e8246614b495bed50df98ceec} 
+esp\+\_\+err\+\_\+t get\+\_\+handler (\begin{DoxyParamCaption}\item[{httpd\+\_\+req\+\_\+t \texorpdfstring{$\ast$}{*}}]{req}{}\end{DoxyParamCaption})}
+
+\Hypertarget{web__server_8h_ae7d6567c9aa9a23c2d63ed0b2ddf1a0f}\index{web\_server.h@{web\_server.h}!init\_http\_server@{init\_http\_server}}
+\index{init\_http\_server@{init\_http\_server}!web\_server.h@{web\_server.h}}
+\doxysubsubsection{\texorpdfstring{init\_http\_server()}{init\_http\_server()}}
+{\footnotesize\ttfamily \label{web__server_8h_ae7d6567c9aa9a23c2d63ed0b2ddf1a0f} 
+void init\+\_\+http\+\_\+server (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Função para iniciar o servidor web. 
+
+\Hypertarget{web__server_8h_aa405dbf500a1f511f559e1e87efff9da}\index{web\_server.h@{web\_server.h}!start\_webserver@{start\_webserver}}
+\index{start\_webserver@{start\_webserver}!web\_server.h@{web\_server.h}}
+\doxysubsubsection{\texorpdfstring{start\_webserver()}{start\_webserver()}}
+{\footnotesize\ttfamily \label{web__server_8h_aa405dbf500a1f511f559e1e87efff9da} 
+httpd\+\_\+handle\+\_\+t start\+\_\+webserver (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Função interna para iniciar o servidor web. Associação de endpoints. Configuração de task. Inicialização do filesystem. 
+
+\Hypertarget{web__server_8h_ab289ced6a1beb997e4a6be1f3c7a2530}\index{web\_server.h@{web\_server.h}!stop\_webserver@{stop\_webserver}}
+\index{stop\_webserver@{stop\_webserver}!web\_server.h@{web\_server.h}}
+\doxysubsubsection{\texorpdfstring{stop\_webserver()}{stop\_webserver()}}
+{\footnotesize\ttfamily \label{web__server_8h_ab289ced6a1beb997e4a6be1f3c7a2530} 
+void stop\+\_\+webserver (\begin{DoxyParamCaption}\item[{httpd\+\_\+handle\+\_\+t}]{server}{}\end{DoxyParamCaption})}
+
+
+
+Função interna para desligar o servidor web. 
+

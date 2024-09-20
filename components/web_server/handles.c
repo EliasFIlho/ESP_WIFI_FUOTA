@@ -1,5 +1,17 @@
 #include "handles.h"
 
+
+
+/**
+ * @brief Handle para lidar com requests no endpoint /
+ * 
+ * Recebe um request e responde a pagina de login.
+ * A pagina é resgatada pelo filesystem
+ * 
+ * @param req 
+ * @return esp_err_t 
+ */
+
 esp_err_t root_get_handler(httpd_req_t *req)
 {
     const char *TAG = "[/] Handle:";
@@ -10,6 +22,17 @@ esp_err_t root_get_handler(httpd_req_t *req)
     httpd_resp_send(req, page, strlen(page));
     return ESP_OK;
 }
+
+
+/**
+ * @brief Função para lidar com request GET ao endpoint /config
+ * 
+ * Recebe um request e responde a pagina de configuração.
+ * A pagina é resgatada pelo filesystem
+ * 
+ * @param req 
+ * @return esp_err_t 
+ */
 
 esp_err_t config_get_handler(httpd_req_t *req)
 {
@@ -33,6 +56,14 @@ esp_err_t config_get_handler(httpd_req_t *req)
     return ESP_OK;
 }
 
+
+/**
+ * @brief Função para comparar string de io vindo do formulario de configuração e retornar um enum respectivo.
+ * 
+ * @param data 
+ * @return io_set_t 
+ */
+
 io_set_t io_config_comp(char *data)
 {
     if (strcmp(data, "on_off") == 0)
@@ -49,6 +80,17 @@ io_set_t io_config_comp(char *data)
     }
 }
 
+/**
+ * @brief Função para validar strings recebidas pelo formulario e escrever em um buffer.
+ * 
+ * A função recebe o buffer de destino, o tamanho do buffer, a chave do arquivo json e objeto cJSON
+ * 
+ * @param dest 
+ * @param dest_size 
+ * @param key 
+ * @param json 
+ */
+
 void validate_and_assing(char *dest, size_t dest_size, const char *key, cJSON *json)
 {
     cJSON *data;
@@ -58,6 +100,16 @@ void validate_and_assing(char *dest, size_t dest_size, const char *key, cJSON *j
         snprintf(dest, dest_size, data->valuestring);
     }
 }
+
+/**
+ * @brief Função para validar inteiros e armazenar em uma variavel na memoria.
+ * 
+ * A função recebe uma variavel int* de destino, a chave do arquivo json e o objeto cJSON.
+ * 
+ * @param dest 
+ * @param key 
+ * @param json 
+ */
 
 void validate_and_assing_atoi(int *dest, const char *key, cJSON *json)
 {
@@ -69,6 +121,15 @@ void validate_and_assing_atoi(int *dest, const char *key, cJSON *json)
     }
 }
 
+/**
+ * @brief Função para validar os dados de IO recebidos pelo formulario e escrever em uma variavel.
+ * A função recebe uma variavel io_set_t* de destino, a chave do arquivo json e o objeto cJSON.
+ * 
+ * @param dest 
+ * @param key 
+ * @param json 
+ */
+
 void validate_and_assing_io(io_set_t *dest, const char *key, cJSON *json)
 {
     cJSON *data;
@@ -78,6 +139,16 @@ void validate_and_assing_io(io_set_t *dest, const char *key, cJSON *json)
         *dest = io_config_comp(data->valuestring);
     }
 }
+
+/**
+ * @brief Função para realizar o parser do arquivo json enviado pelo formulario.
+ * 
+ * A função recebe um ponteiro que será parseado e um ponteiro para uma estrutura para armazenar os dados.
+ * 
+ * @param content 
+ * @param config_structure 
+ * @return esp_err_t 
+ */
 
 esp_err_t parse_config_body(char *content, device_cfg_t *config_structure)
 {
@@ -107,6 +178,16 @@ esp_err_t parse_config_body(char *content, device_cfg_t *config_structure)
     return ESP_OK;
 }
 
+/**
+ * @brief Função para lidar com request POST ao endpoint /config
+ * 
+ * Recebe um request e responde a pagina de login.
+ * A pagina é resgatada pelo filesystem.
+ * O JSON recebido é enviado para parser que alimenta a estrutura device_cfg_t. 
+ * 
+ * @param req 
+ * @return esp_err_t 
+ */
 esp_err_t config_post_handler(httpd_req_t *req)
 {
     char content[512];
@@ -131,6 +212,23 @@ esp_err_t config_post_handler(httpd_req_t *req)
     return ret;
 }
 
+
+/**
+ * @brief Função para receber requests POST e escrever em um buffer
+ * 
+ * Recebe um request, um buffer e o tamanho do buffer.
+ * Caso o request seja maior que o buffer a função irá retornar um dado incompleto.
+ * Em caso de timeout a função retornará ESP_FAIL.
+ * Caso não tenha dados no request a função retornará ESP_FAIL.
+ * Caso tudo ocorra sem problemas a função retorna ESP_OK.
+ * 
+ * @param req 
+ * @param buffer 
+ * @param buffer_size 
+ * @return esp_err_t 
+ */
+
+
 esp_err_t read_recv_data_as_string(httpd_req_t *req, char *buffer, size_t buffer_size)
 {
     size_t recv_size = MIN(req->content_len, buffer_size);
@@ -151,6 +249,20 @@ esp_err_t read_recv_data_as_string(httpd_req_t *req, char *buffer, size_t buffer
     }
     return ESP_FAIL;
 }
+
+
+
+/**
+ * @brief Função para autenticação de login
+ * 
+ * TODO
+ * 
+ * Por hora, apenas retorna uma pagina web.
+ * 
+ * @param req 
+ * @return esp_err_t 
+ */
+
 esp_err_t authentication_post_handler(httpd_req_t *req)
 {
     char content[100];

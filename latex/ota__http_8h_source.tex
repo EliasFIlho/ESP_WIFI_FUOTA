@@ -1,0 +1,32 @@
+\doxysection{ota\+\_\+http.\+h}
+\hypertarget{ota__http_8h_source}{}\label{ota__http_8h_source}\index{components/ota\_http/include/ota\_http.h@{components/ota\_http/include/ota\_http.h}}
+\mbox{\hyperlink{ota__http_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}freertos/FreeRTOS.h"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}freertos/task.h"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}esp\_log.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}esp\_http\_client.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}esp\_check.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}cJSON.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}\{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{structota__http__t_af739c2e3a13f9a7ea382b08884f46991}{host}};}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{structota__http__t_af56061f72787d8e27a733608236373f7}{end\_point\_version}};}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{structota__http__t_a8d774530b7af14b5431d8410c7b35d2b}{end\_point\_firmware}};}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structota__http__t_abf59feaa3343dae2de9a54c4b44a0843}{port}};}
+\DoxyCodeLine{00014\ \}\mbox{\hyperlink{structota__http__t}{ota\_http\_t}};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{ota__http_8h_a7c7c22a79059b0aff6bf2c82a3533e1e}{init\_ota\_monitor}}(\mbox{\hyperlink{structota__http__t}{ota\_http\_t}}\ *http\_config);}
+\DoxyCodeLine{00018\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{ota__http_8h_a75f8f4ddb5fe56077e82179e946a6221}{ota\_monitor\_task}}(\textcolor{keywordtype}{void}\ *pvParameters);}
+\DoxyCodeLine{00019\ esp\_err\_t\ \mbox{\hyperlink{ota__http_8h_a393328b3013ecbb027034e393e657dc7}{\_http\_handle}}(esp\_http\_client\_event\_t\ *evt);}
+\DoxyCodeLine{00020\ esp\_err\_t\ \mbox{\hyperlink{ota__http_8h_af43febee11751d874b9feab5d394f5aa}{get\_request}}();}
+\DoxyCodeLine{00021\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{ota__http_8h_a802bd59bdbc9d0c29c4772fa0f881962}{compare\_version}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *version\_to\_compare,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *current\_version);}
+\DoxyCodeLine{00022\ esp\_err\_t\ \mbox{\hyperlink{ota__http_8h_a108a0e9007fff74adf8187c204a0c499}{parse\_json}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *json\_str,\ \textcolor{keywordtype}{char}\ *version\_buffer,\ \textcolor{keywordtype}{size\_t}\ version\_buffer\_size);}
+\DoxyCodeLine{00023\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{ota__http_8h_a8484710064bc068f09da2f65334d2e3d}{http\_config\_get\_request}}(esp\_http\_client\_config\_t\ *conf,\ \mbox{\hyperlink{structota__http__t}{ota\_http\_t}}\ *http\_config,\ \textcolor{keywordtype}{bool}\ version,\textcolor{keywordtype}{bool}\ evt);}
+\DoxyCodeLine{00024\ esp\_err\_t\ \mbox{\hyperlink{ota__http_8h_a67358c721f36f48edaa357ead0529774}{perfom\_request}}(esp\_http\_client\_config\_t\ *config);}
+\DoxyCodeLine{00025\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{ota__http_8h_a3df4f992edda330df85bd66376686438}{perform\_http\_ota}}(\mbox{\hyperlink{structota__http__t}{ota\_http\_t}}\ *http\_config);}
+\DoxyCodeLine{00026\ }
+
+\end{DoxyCode}

@@ -1,0 +1,249 @@
+\doxysection{components/web\+\_\+server/include/handles.h File Reference}
+\hypertarget{handles_8h}{}\label{handles_8h}\index{components/web\_server/include/handles.h@{components/web\_server/include/handles.h}}
+{\ttfamily \#include "{}filesystem.\+h"{}}\newline
+{\ttfamily \#include "{}web\+\_\+server.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+log.\+h"{}}\newline
+{\ttfamily \#include "{}defines\+\_\+types.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+esp\+\_\+err\+\_\+t \mbox{\hyperlink{handles_8h_a86e5b8a98acfeb264bd7ec7a89ba10bd}{root\+\_\+get\+\_\+handler}} (httpd\+\_\+req\+\_\+t \texorpdfstring{$\ast$}{*}req)
+\begin{DoxyCompactList}\small\item\em Handle para lidar com requests no endpoint /. \end{DoxyCompactList}\item 
+esp\+\_\+err\+\_\+t \mbox{\hyperlink{handles_8h_a8e7a01581d7761e79f7a0a0ff59a9432}{authentication\+\_\+post\+\_\+handler}} (httpd\+\_\+req\+\_\+t \texorpdfstring{$\ast$}{*}req)
+\begin{DoxyCompactList}\small\item\em Função para autenticação de login. \end{DoxyCompactList}\item 
+esp\+\_\+err\+\_\+t \mbox{\hyperlink{handles_8h_ac38b6c21b38c1eb3378ea996a3b6b767}{read\+\_\+recv\+\_\+data\+\_\+as\+\_\+string}} (httpd\+\_\+req\+\_\+t \texorpdfstring{$\ast$}{*}req, char \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t buffer\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Função para receber requests POST e escrever em um buffer. \end{DoxyCompactList}\item 
+esp\+\_\+err\+\_\+t \mbox{\hyperlink{handles_8h_add09d5c6930935789427116b62020622}{config\+\_\+get\+\_\+handler}} (httpd\+\_\+req\+\_\+t \texorpdfstring{$\ast$}{*}req)
+\begin{DoxyCompactList}\small\item\em Função para lidar com request GET ao endpoint /config. \end{DoxyCompactList}\item 
+esp\+\_\+err\+\_\+t \mbox{\hyperlink{handles_8h_a91b0ac5a0002d2948fe0c9c8d8347441}{read\+\_\+file\+\_\+as\+\_\+str\+\_\+chunked}} (const char \texorpdfstring{$\ast$}{*}file\+\_\+name, char \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t buffer\+\_\+size, long \texorpdfstring{$\ast$}{*}position)
+\item 
+esp\+\_\+err\+\_\+t \mbox{\hyperlink{handles_8h_a1f9c23c8d45e6f79338db9dd0cfc0f6e}{config\+\_\+post\+\_\+handler}} (httpd\+\_\+req\+\_\+t \texorpdfstring{$\ast$}{*}req)
+\begin{DoxyCompactList}\small\item\em Função para lidar com request POST ao endpoint /config. \end{DoxyCompactList}\item 
+esp\+\_\+err\+\_\+t \mbox{\hyperlink{handles_8h_acab680408fcd0a85a628d9eede4e3225}{parse\+\_\+config\+\_\+body}} (char \texorpdfstring{$\ast$}{*}content, \mbox{\hyperlink{structdevice__cfg__t}{device\+\_\+cfg\+\_\+t}} \texorpdfstring{$\ast$}{*}config\+\_\+structure)
+\begin{DoxyCompactList}\small\item\em Função para realizar o parser do arquivo json enviado pelo formulario. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{defines__types_8h_a9ad09aa0dfdaa1431650b3e82195ba48}{io\+\_\+set\+\_\+t}} \mbox{\hyperlink{handles_8h_a02614ab3db1e3c57232909536dc79342}{io\+\_\+config\+\_\+comp}} (char \texorpdfstring{$\ast$}{*}data)
+\begin{DoxyCompactList}\small\item\em Função para comparar string de io vindo do formulario de configuração e retornar um enum respectivo. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{handles_8h_aafe76b86ebb48ea1876f0cb76e022cff}{validate\+\_\+and\+\_\+assing}} (char \texorpdfstring{$\ast$}{*}dest, size\+\_\+t dest\+\_\+size, const char \texorpdfstring{$\ast$}{*}key, c\+JSON \texorpdfstring{$\ast$}{*}json)
+\begin{DoxyCompactList}\small\item\em Função para validar strings recebidas pelo formulario e escrever em um buffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{handles_8h_a16f6dcb37c81cededce92d3bb8f23f97}{validate\+\_\+and\+\_\+assing\+\_\+atoi}} (int \texorpdfstring{$\ast$}{*}dest, const char \texorpdfstring{$\ast$}{*}key, c\+JSON \texorpdfstring{$\ast$}{*}json)
+\begin{DoxyCompactList}\small\item\em Função para validar inteiros e armazenar em uma variavel na memoria. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{handles_8h_a4ceeeae7f9d0e6e99c0bd4611bd6211c}{validate\+\_\+and\+\_\+assing\+\_\+io}} (\mbox{\hyperlink{defines__types_8h_a9ad09aa0dfdaa1431650b3e82195ba48}{io\+\_\+set\+\_\+t}} \texorpdfstring{$\ast$}{*}dest, const char \texorpdfstring{$\ast$}{*}key, c\+JSON \texorpdfstring{$\ast$}{*}json)
+\begin{DoxyCompactList}\small\item\em Função para validar os dados de IO recebidos pelo formulario e escrever em uma variavel. A função recebe uma variavel io\+\_\+set\+\_\+t\texorpdfstring{$\ast$}{*} de destino, a chave do arquivo json e o objeto c\+JSON. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{handles_8h_a8e7a01581d7761e79f7a0a0ff59a9432}\index{handles.h@{handles.h}!authentication\_post\_handler@{authentication\_post\_handler}}
+\index{authentication\_post\_handler@{authentication\_post\_handler}!handles.h@{handles.h}}
+\doxysubsubsection{\texorpdfstring{authentication\_post\_handler()}{authentication\_post\_handler()}}
+{\footnotesize\ttfamily \label{handles_8h_a8e7a01581d7761e79f7a0a0ff59a9432} 
+esp\+\_\+err\+\_\+t authentication\+\_\+post\+\_\+handler (\begin{DoxyParamCaption}\item[{httpd\+\_\+req\+\_\+t \texorpdfstring{$\ast$}{*}}]{req}{}\end{DoxyParamCaption})}
+
+
+
+Função para autenticação de login. 
+
+TODO
+
+Por hora, apenas retorna uma pagina web.
+
+
+\begin{DoxyParams}{Parameters}
+{\em req} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+esp\+\_\+err\+\_\+t 
+\end{DoxyReturn}
+\Hypertarget{handles_8h_add09d5c6930935789427116b62020622}\index{handles.h@{handles.h}!config\_get\_handler@{config\_get\_handler}}
+\index{config\_get\_handler@{config\_get\_handler}!handles.h@{handles.h}}
+\doxysubsubsection{\texorpdfstring{config\_get\_handler()}{config\_get\_handler()}}
+{\footnotesize\ttfamily \label{handles_8h_add09d5c6930935789427116b62020622} 
+esp\+\_\+err\+\_\+t config\+\_\+get\+\_\+handler (\begin{DoxyParamCaption}\item[{httpd\+\_\+req\+\_\+t \texorpdfstring{$\ast$}{*}}]{req}{}\end{DoxyParamCaption})}
+
+
+
+Função para lidar com request GET ao endpoint /config. 
+
+Recebe um request e responde a pagina de configuração. A pagina é resgatada pelo filesystem
+
+
+\begin{DoxyParams}{Parameters}
+{\em req} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+esp\+\_\+err\+\_\+t 
+\end{DoxyReturn}
+\Hypertarget{handles_8h_a1f9c23c8d45e6f79338db9dd0cfc0f6e}\index{handles.h@{handles.h}!config\_post\_handler@{config\_post\_handler}}
+\index{config\_post\_handler@{config\_post\_handler}!handles.h@{handles.h}}
+\doxysubsubsection{\texorpdfstring{config\_post\_handler()}{config\_post\_handler()}}
+{\footnotesize\ttfamily \label{handles_8h_a1f9c23c8d45e6f79338db9dd0cfc0f6e} 
+esp\+\_\+err\+\_\+t config\+\_\+post\+\_\+handler (\begin{DoxyParamCaption}\item[{httpd\+\_\+req\+\_\+t \texorpdfstring{$\ast$}{*}}]{req}{}\end{DoxyParamCaption})}
+
+
+
+Função para lidar com request POST ao endpoint /config. 
+
+Recebe um request e responde a pagina de login. A pagina é resgatada pelo filesystem. O JSON recebido é enviado para parser que alimenta a estrutura \doxylink{structdevice__cfg__t}{device\+\_\+cfg\+\_\+t}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em req} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+esp\+\_\+err\+\_\+t 
+\end{DoxyReturn}
+\Hypertarget{handles_8h_a02614ab3db1e3c57232909536dc79342}\index{handles.h@{handles.h}!io\_config\_comp@{io\_config\_comp}}
+\index{io\_config\_comp@{io\_config\_comp}!handles.h@{handles.h}}
+\doxysubsubsection{\texorpdfstring{io\_config\_comp()}{io\_config\_comp()}}
+{\footnotesize\ttfamily \label{handles_8h_a02614ab3db1e3c57232909536dc79342} 
+\mbox{\hyperlink{defines__types_8h_a9ad09aa0dfdaa1431650b3e82195ba48}{io\+\_\+set\+\_\+t}} io\+\_\+config\+\_\+comp (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Função para comparar string de io vindo do formulario de configuração e retornar um enum respectivo. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+io\+\_\+set\+\_\+t 
+\end{DoxyReturn}
+\Hypertarget{handles_8h_acab680408fcd0a85a628d9eede4e3225}\index{handles.h@{handles.h}!parse\_config\_body@{parse\_config\_body}}
+\index{parse\_config\_body@{parse\_config\_body}!handles.h@{handles.h}}
+\doxysubsubsection{\texorpdfstring{parse\_config\_body()}{parse\_config\_body()}}
+{\footnotesize\ttfamily \label{handles_8h_acab680408fcd0a85a628d9eede4e3225} 
+esp\+\_\+err\+\_\+t parse\+\_\+config\+\_\+body (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{content}{, }\item[{\mbox{\hyperlink{structdevice__cfg__t}{device\+\_\+cfg\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{config\+\_\+structure}{}\end{DoxyParamCaption})}
+
+
+
+Função para realizar o parser do arquivo json enviado pelo formulario. 
+
+A função recebe um ponteiro que será parseado e um ponteiro para uma estrutura para armazenar os dados.
+
+
+\begin{DoxyParams}{Parameters}
+{\em content} & \\
+\hline
+{\em config\+\_\+structure} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+esp\+\_\+err\+\_\+t 
+\end{DoxyReturn}
+\Hypertarget{handles_8h_a91b0ac5a0002d2948fe0c9c8d8347441}\index{handles.h@{handles.h}!read\_file\_as\_str\_chunked@{read\_file\_as\_str\_chunked}}
+\index{read\_file\_as\_str\_chunked@{read\_file\_as\_str\_chunked}!handles.h@{handles.h}}
+\doxysubsubsection{\texorpdfstring{read\_file\_as\_str\_chunked()}{read\_file\_as\_str\_chunked()}}
+{\footnotesize\ttfamily \label{handles_8h_a91b0ac5a0002d2948fe0c9c8d8347441} 
+esp\+\_\+err\+\_\+t read\+\_\+file\+\_\+as\+\_\+str\+\_\+chunked (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{file\+\_\+name}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{buffer\+\_\+size}{, }\item[{long \texorpdfstring{$\ast$}{*}}]{position}{}\end{DoxyParamCaption})}
+
+\Hypertarget{handles_8h_ac38b6c21b38c1eb3378ea996a3b6b767}\index{handles.h@{handles.h}!read\_recv\_data\_as\_string@{read\_recv\_data\_as\_string}}
+\index{read\_recv\_data\_as\_string@{read\_recv\_data\_as\_string}!handles.h@{handles.h}}
+\doxysubsubsection{\texorpdfstring{read\_recv\_data\_as\_string()}{read\_recv\_data\_as\_string()}}
+{\footnotesize\ttfamily \label{handles_8h_ac38b6c21b38c1eb3378ea996a3b6b767} 
+esp\+\_\+err\+\_\+t read\+\_\+recv\+\_\+data\+\_\+as\+\_\+string (\begin{DoxyParamCaption}\item[{httpd\+\_\+req\+\_\+t \texorpdfstring{$\ast$}{*}}]{req}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{buffer\+\_\+size}{}\end{DoxyParamCaption})}
+
+
+
+Função para receber requests POST e escrever em um buffer. 
+
+Recebe um request, um buffer e o tamanho do buffer. Caso o request seja maior que o buffer a função irá retornar um dado incompleto. Em caso de timeout a função retornará ESP\+\_\+\+FAIL. Caso não tenha dados no request a função retornará ESP\+\_\+\+FAIL. Caso tudo ocorra sem problemas a função retorna ESP\+\_\+\+OK.
+
+
+\begin{DoxyParams}{Parameters}
+{\em req} & \\
+\hline
+{\em buffer} & \\
+\hline
+{\em buffer\+\_\+size} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+esp\+\_\+err\+\_\+t 
+\end{DoxyReturn}
+\Hypertarget{handles_8h_a86e5b8a98acfeb264bd7ec7a89ba10bd}\index{handles.h@{handles.h}!root\_get\_handler@{root\_get\_handler}}
+\index{root\_get\_handler@{root\_get\_handler}!handles.h@{handles.h}}
+\doxysubsubsection{\texorpdfstring{root\_get\_handler()}{root\_get\_handler()}}
+{\footnotesize\ttfamily \label{handles_8h_a86e5b8a98acfeb264bd7ec7a89ba10bd} 
+esp\+\_\+err\+\_\+t root\+\_\+get\+\_\+handler (\begin{DoxyParamCaption}\item[{httpd\+\_\+req\+\_\+t \texorpdfstring{$\ast$}{*}}]{req}{}\end{DoxyParamCaption})}
+
+
+
+Handle para lidar com requests no endpoint /. 
+
+Recebe um request e responde a pagina de login. A pagina é resgatada pelo filesystem
+
+
+\begin{DoxyParams}{Parameters}
+{\em req} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+esp\+\_\+err\+\_\+t 
+\end{DoxyReturn}
+\Hypertarget{handles_8h_aafe76b86ebb48ea1876f0cb76e022cff}\index{handles.h@{handles.h}!validate\_and\_assing@{validate\_and\_assing}}
+\index{validate\_and\_assing@{validate\_and\_assing}!handles.h@{handles.h}}
+\doxysubsubsection{\texorpdfstring{validate\_and\_assing()}{validate\_and\_assing()}}
+{\footnotesize\ttfamily \label{handles_8h_aafe76b86ebb48ea1876f0cb76e022cff} 
+void validate\+\_\+and\+\_\+assing (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{dest}{, }\item[{size\+\_\+t}]{dest\+\_\+size}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{key}{, }\item[{c\+JSON \texorpdfstring{$\ast$}{*}}]{json}{}\end{DoxyParamCaption})}
+
+
+
+Função para validar strings recebidas pelo formulario e escrever em um buffer. 
+
+A função recebe o buffer de destino, o tamanho do buffer, a chave do arquivo json e objeto c\+JSON
+
+
+\begin{DoxyParams}{Parameters}
+{\em dest} & \\
+\hline
+{\em dest\+\_\+size} & \\
+\hline
+{\em key} & \\
+\hline
+{\em json} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{handles_8h_a16f6dcb37c81cededce92d3bb8f23f97}\index{handles.h@{handles.h}!validate\_and\_assing\_atoi@{validate\_and\_assing\_atoi}}
+\index{validate\_and\_assing\_atoi@{validate\_and\_assing\_atoi}!handles.h@{handles.h}}
+\doxysubsubsection{\texorpdfstring{validate\_and\_assing\_atoi()}{validate\_and\_assing\_atoi()}}
+{\footnotesize\ttfamily \label{handles_8h_a16f6dcb37c81cededce92d3bb8f23f97} 
+void validate\+\_\+and\+\_\+assing\+\_\+atoi (\begin{DoxyParamCaption}\item[{int \texorpdfstring{$\ast$}{*}}]{dest}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{key}{, }\item[{c\+JSON \texorpdfstring{$\ast$}{*}}]{json}{}\end{DoxyParamCaption})}
+
+
+
+Função para validar inteiros e armazenar em uma variavel na memoria. 
+
+A função recebe uma variavel int\texorpdfstring{$\ast$}{*} de destino, a chave do arquivo json e o objeto c\+JSON.
+
+
+\begin{DoxyParams}{Parameters}
+{\em dest} & \\
+\hline
+{\em key} & \\
+\hline
+{\em json} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{handles_8h_a4ceeeae7f9d0e6e99c0bd4611bd6211c}\index{handles.h@{handles.h}!validate\_and\_assing\_io@{validate\_and\_assing\_io}}
+\index{validate\_and\_assing\_io@{validate\_and\_assing\_io}!handles.h@{handles.h}}
+\doxysubsubsection{\texorpdfstring{validate\_and\_assing\_io()}{validate\_and\_assing\_io()}}
+{\footnotesize\ttfamily \label{handles_8h_a4ceeeae7f9d0e6e99c0bd4611bd6211c} 
+void validate\+\_\+and\+\_\+assing\+\_\+io (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{defines__types_8h_a9ad09aa0dfdaa1431650b3e82195ba48}{io\+\_\+set\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{dest}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{key}{, }\item[{c\+JSON \texorpdfstring{$\ast$}{*}}]{json}{}\end{DoxyParamCaption})}
+
+
+
+Função para validar os dados de IO recebidos pelo formulario e escrever em uma variavel. A função recebe uma variavel io\+\_\+set\+\_\+t\texorpdfstring{$\ast$}{*} de destino, a chave do arquivo json e o objeto c\+JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dest} & \\
+\hline
+{\em key} & \\
+\hline
+{\em json} & \\
+\hline
+\end{DoxyParams}

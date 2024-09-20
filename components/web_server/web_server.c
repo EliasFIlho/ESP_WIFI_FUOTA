@@ -7,6 +7,11 @@
 #define RESP_LEN 16
 const char *TAG = "WEB SERVER [+]";
 
+/**
+ * @brief Função para iniciar o servidor web.
+ * 
+ */
+
 void init_http_server()
 {
 
@@ -20,7 +25,14 @@ void init_http_server()
 
 
 
-//End points structures
+/**
+ * @brief Estrutura de endpoint.
+ * 
+ * Endpoint: /
+ * Fução associada: root_get_handler
+ * Metodo: GET
+ * 
+ */
 
 httpd_uri_t uri_get = {
     .uri = "/",
@@ -28,17 +40,43 @@ httpd_uri_t uri_get = {
     .handler = root_get_handler,
     .user_ctx = NULL};
 
+/**
+ * @brief Estrutura de endpoint.
+ * 
+ * Endpoint: /authentication
+ * Fução associada: authentication_post_handler
+ * Metodo: POST
+ * 
+ */
 httpd_uri_t uri_post = {
     .uri = "/authentication",
     .method = HTTP_POST,
     .handler = authentication_post_handler,
     .user_ctx = NULL};
 
+/**
+ * @brief Estrutura de endpoint.
+ * 
+ * Endpoint: /config
+ * Fução associada: config_get_handler
+ * Metodo: GET
+ * 
+ */
+
 httpd_uri_t config_endpoint_get = {
     .uri = "/config",
     .method = HTTP_GET,
     .handler = config_get_handler,
     .user_ctx = NULL,};
+
+/**
+ * @brief Estrutura de endpoint.
+ * 
+ * Endpoint: /config
+ * Fução associada: config_post_handler
+ * Metodo: POST
+ * 
+ */
 
 httpd_uri_t config_endpoint_post = {
     .uri = "/config",
@@ -48,7 +86,12 @@ httpd_uri_t config_endpoint_post = {
 
 
 
-
+/**
+ * @brief Função interna para iniciar o servidor web.
+ * Associação de endpoints.
+ * Configuração de task.
+ * Inicialização do filesystem.
+ */
 httpd_handle_t start_webserver(void)
 {
 
@@ -66,6 +109,12 @@ httpd_handle_t start_webserver(void)
     }
     return server;
 }
+
+
+/**
+ * @brief Função interna para desligar o servidor web.
+ * 
+ */
 
 void stop_webserver(httpd_handle_t server)
 {

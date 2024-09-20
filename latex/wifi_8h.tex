@@ -1,0 +1,38 @@
+\doxysection{components/wifi/include/wifi.h File Reference}
+\hypertarget{wifi_8h}{}\label{wifi_8h}\index{components/wifi/include/wifi.h@{components/wifi/include/wifi.h}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include "{}esp\+\_\+wifi.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+event.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+log.\+h"{}}\newline
+{\ttfamily \#include "{}lwip/err.\+h"{}}\newline
+{\ttfamily \#include "{}lwip/sys.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{wifi_8h_a1097be531ff16ebdd59112dfb5c718bd}{wifi\+\_\+event\+\_\+handle}} (void \texorpdfstring{$\ast$}{*}event\+\_\+handler\+\_\+arg, esp\+\_\+event\+\_\+base\+\_\+t event\+\_\+base, int32\+\_\+t event\+\_\+id, void \texorpdfstring{$\ast$}{*}event\+\_\+data)
+\item 
+void \mbox{\hyperlink{wifi_8h_a3e5cf332da64f5d96e3cbf3cab69488a}{wifi\+\_\+ip\+\_\+event\+\_\+handler}} (void \texorpdfstring{$\ast$}{*}event\+\_\+handler\+\_\+arg, esp\+\_\+event\+\_\+base\+\_\+t event\+\_\+base, int32\+\_\+t event\+\_\+id, void \texorpdfstring{$\ast$}{*}event\+\_\+data)
+\item 
+void \mbox{\hyperlink{wifi_8h_aaf48dd31815d6c6e4a94cebfb63e56a3}{wifi\+\_\+init\+\_\+sta}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{wifi_8h_a1097be531ff16ebdd59112dfb5c718bd}\index{wifi.h@{wifi.h}!wifi\_event\_handle@{wifi\_event\_handle}}
+\index{wifi\_event\_handle@{wifi\_event\_handle}!wifi.h@{wifi.h}}
+\doxysubsubsection{\texorpdfstring{wifi\_event\_handle()}{wifi\_event\_handle()}}
+{\footnotesize\ttfamily \label{wifi_8h_a1097be531ff16ebdd59112dfb5c718bd} 
+void wifi\+\_\+event\+\_\+handle (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{event\+\_\+handler\+\_\+arg}{, }\item[{esp\+\_\+event\+\_\+base\+\_\+t}]{event\+\_\+base}{, }\item[{int32\+\_\+t}]{event\+\_\+id}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{event\+\_\+data}{}\end{DoxyParamCaption})}
+
+\Hypertarget{wifi_8h_aaf48dd31815d6c6e4a94cebfb63e56a3}\index{wifi.h@{wifi.h}!wifi\_init\_sta@{wifi\_init\_sta}}
+\index{wifi\_init\_sta@{wifi\_init\_sta}!wifi.h@{wifi.h}}
+\doxysubsubsection{\texorpdfstring{wifi\_init\_sta()}{wifi\_init\_sta()}}
+{\footnotesize\ttfamily \label{wifi_8h_aaf48dd31815d6c6e4a94cebfb63e56a3} 
+void wifi\+\_\+init\+\_\+sta (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{wifi_8h_a3e5cf332da64f5d96e3cbf3cab69488a}\index{wifi.h@{wifi.h}!wifi\_ip\_event\_handler@{wifi\_ip\_event\_handler}}
+\index{wifi\_ip\_event\_handler@{wifi\_ip\_event\_handler}!wifi.h@{wifi.h}}
+\doxysubsubsection{\texorpdfstring{wifi\_ip\_event\_handler()}{wifi\_ip\_event\_handler()}}
+{\footnotesize\ttfamily \label{wifi_8h_a3e5cf332da64f5d96e3cbf3cab69488a} 
+void wifi\+\_\+ip\+\_\+event\+\_\+handler (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{event\+\_\+handler\+\_\+arg}{, }\item[{esp\+\_\+event\+\_\+base\+\_\+t}]{event\+\_\+base}{, }\item[{int32\+\_\+t}]{event\+\_\+id}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{event\+\_\+data}{}\end{DoxyParamCaption})}
+

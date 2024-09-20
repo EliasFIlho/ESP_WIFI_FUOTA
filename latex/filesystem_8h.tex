@@ -1,0 +1,37 @@
+\doxysection{components/web\+\_\+server/include/filesystem.h File Reference}
+\hypertarget{filesystem_8h}{}\label{filesystem_8h}\index{components/web\_server/include/filesystem.h@{components/web\_server/include/filesystem.h}}
+{\ttfamily \#include "{}esp\+\_\+spiffs.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+log.\+h"{}}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}defines\+\_\+types.\+h"{}}\newline
+{\ttfamily \#include "{}c\+JSON.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{filesystem_8h_a31fa5fec2e8ef080df2ebe3c444ef358}{init\+\_\+file\+\_\+system}} ()
+\item 
+void \mbox{\hyperlink{filesystem_8h_ad6326b2d243a29a07b4bf280752ae62e}{read\+\_\+file\+\_\+as\+\_\+str}} (const char \texorpdfstring{$\ast$}{*}file\+\_\+name, char \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t buffer\+\_\+size)
+\item 
+esp\+\_\+err\+\_\+t \mbox{\hyperlink{filesystem_8h_a92dcd7688f971f328c106454984a33d4}{write\+\_\+config\+\_\+file}} (\mbox{\hyperlink{structdevice__cfg__t}{device\+\_\+cfg\+\_\+t}} \texorpdfstring{$\ast$}{*}dev)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{filesystem_8h_a31fa5fec2e8ef080df2ebe3c444ef358}\index{filesystem.h@{filesystem.h}!init\_file\_system@{init\_file\_system}}
+\index{init\_file\_system@{init\_file\_system}!filesystem.h@{filesystem.h}}
+\doxysubsubsection{\texorpdfstring{init\_file\_system()}{init\_file\_system()}}
+{\footnotesize\ttfamily \label{filesystem_8h_a31fa5fec2e8ef080df2ebe3c444ef358} 
+void init\+\_\+file\+\_\+system (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{filesystem_8h_ad6326b2d243a29a07b4bf280752ae62e}\index{filesystem.h@{filesystem.h}!read\_file\_as\_str@{read\_file\_as\_str}}
+\index{read\_file\_as\_str@{read\_file\_as\_str}!filesystem.h@{filesystem.h}}
+\doxysubsubsection{\texorpdfstring{read\_file\_as\_str()}{read\_file\_as\_str()}}
+{\footnotesize\ttfamily \label{filesystem_8h_ad6326b2d243a29a07b4bf280752ae62e} 
+void read\+\_\+file\+\_\+as\+\_\+str (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{file\+\_\+name}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{buffer\+\_\+size}{}\end{DoxyParamCaption})}
+
+\Hypertarget{filesystem_8h_a92dcd7688f971f328c106454984a33d4}\index{filesystem.h@{filesystem.h}!write\_config\_file@{write\_config\_file}}
+\index{write\_config\_file@{write\_config\_file}!filesystem.h@{filesystem.h}}
+\doxysubsubsection{\texorpdfstring{write\_config\_file()}{write\_config\_file()}}
+{\footnotesize\ttfamily \label{filesystem_8h_a92dcd7688f971f328c106454984a33d4} 
+esp\+\_\+err\+\_\+t write\+\_\+config\+\_\+file (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structdevice__cfg__t}{device\+\_\+cfg\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{dev}{}\end{DoxyParamCaption})}
+

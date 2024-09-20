@@ -1,0 +1,37 @@
+\doxysection{defines\+\_\+types.\+h}
+\hypertarget{defines__types_8h_source}{}\label{defines__types_8h_source}\index{components/web\_server/include/defines\_types.h@{components/web\_server/include/defines\_types.h}}
+\mbox{\hyperlink{defines__types_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ CONFIG\_TOKENS\_NUMBER\ 9}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ CONFIG\_TOKENS\_SIZE\ 150}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ DEVICE\_NAME\_BUFFER\ 16}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ DEVICE\_IP\_BUFFER\ 16}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ SERVER\_IP\_BUFFER\ DEVICE\_IP\_BUFFER}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ MIN(X,\ Y)\ (((X)\ <\ (Y))\ ?\ (X)\ :\ (Y))}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ EQUAL(X,\ Y)\ (((X)\ ==\ (Y))\ ?\ (0)\ :\ (1))}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{defines__types_8h_a9ad09aa0dfdaa1431650b3e82195ba48ad3a9df141be0ccf10389b640f492b26d}{DISABLE}}\ =0,}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{defines__types_8h_a9ad09aa0dfdaa1431650b3e82195ba48ae7918442fc4265440af3d2327bcb02c0}{ON\_OFF}},}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{defines__types_8h_a9ad09aa0dfdaa1431650b3e82195ba48a15c404d64d1150bd964e4a6441ed45fd}{PULSE\_COUNTER}}}
+\DoxyCodeLine{00018\ \}\mbox{\hyperlink{defines__types_8h_a9ad09aa0dfdaa1431650b3e82195ba48}{io\_set\_t}};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structdevice__cfg__t_a85047eb83aa58169d86fe66d805dcf32}{device\_name}}[\mbox{\hyperlink{defines__types_8h_af1dde7595cfd2519df3a4ff69630692f}{DEVICE\_NAME\_BUFFER}}];}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structdevice__cfg__t_aeef0343c8ea02fe8f1398f54c36bfb2a}{device\_ip}}[\mbox{\hyperlink{defines__types_8h_afaac6ab23c2f2424782e6735496f2f1f}{DEVICE\_IP\_BUFFER}}];}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structdevice__cfg__t_af52dda364b4d5d521fcdbade124a0d65}{server\_ip}}[\mbox{\hyperlink{defines__types_8h_a78f455cd25cf5e06bdb8eda304de4c57}{SERVER\_IP\_BUFFER}}];}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structdevice__cfg__t_a81aa18d6193c9aa8b484222bcffce401}{port}};}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structdevice__cfg__t_a54aa3ee6cd9307c6058ce7f5799c7c86}{sample\_time}};}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{defines__types_8h_a9ad09aa0dfdaa1431650b3e82195ba48}{io\_set\_t}}\ \mbox{\hyperlink{structdevice__cfg__t_a12b0cd6302526f8243617434083b2207}{io\_01}};}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{defines__types_8h_a9ad09aa0dfdaa1431650b3e82195ba48}{io\_set\_t}}\ \mbox{\hyperlink{structdevice__cfg__t_a90557256fc191e1c2cfb90dcdd78ead3}{io\_02}};}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{defines__types_8h_a9ad09aa0dfdaa1431650b3e82195ba48}{io\_set\_t}}\ \mbox{\hyperlink{structdevice__cfg__t_aa03b73517e6370f137bfdb8adc0d50a4}{io\_03}};}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{defines__types_8h_a9ad09aa0dfdaa1431650b3e82195ba48}{io\_set\_t}}\ \mbox{\hyperlink{structdevice__cfg__t_a9483e0151831a56526127419e11658f3}{io\_04}};}
+\DoxyCodeLine{00031\ \}\mbox{\hyperlink{structdevice__cfg__t}{device\_cfg\_t}};}
+
+\end{DoxyCode}

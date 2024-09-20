@@ -1,0 +1,111 @@
+\doxysection{components/ota\+\_\+http/ota\+\_\+http.c File Reference}
+\hypertarget{ota__http_8c}{}\label{ota__http_8c}\index{components/ota\_http/ota\_http.c@{components/ota\_http/ota\_http.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include "{}ota\+\_\+http.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+https\+\_\+ota.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ota__http_8c_a1c6d5de492ac61ad29aec7aa9a436bbf}{VERSION}}~"{}1.\+0.\+0"{}
+\item 
+\#define \mbox{\hyperlink{ota__http_8c_a138276b7ce80f63d7ac005a4485bce40}{VERSION\+\_\+\+KEY}}~"{}version"{}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{ota__http_8c_a7c7c22a79059b0aff6bf2c82a3533e1e}{init\+\_\+ota\+\_\+monitor}} (\mbox{\hyperlink{structota__http__t}{ota\+\_\+http\+\_\+t}} \texorpdfstring{$\ast$}{*}http\+\_\+config)
+\item 
+esp\+\_\+err\+\_\+t \mbox{\hyperlink{ota__http_8c_a108a0e9007fff74adf8187c204a0c499}{parse\+\_\+json}} (const char \texorpdfstring{$\ast$}{*}json\+\_\+str, char \texorpdfstring{$\ast$}{*}version\+\_\+buffer, size\+\_\+t version\+\_\+buffer\+\_\+size)
+\item 
+bool \mbox{\hyperlink{ota__http_8c_a802bd59bdbc9d0c29c4772fa0f881962}{compare\+\_\+version}} (const char \texorpdfstring{$\ast$}{*}version\+\_\+to\+\_\+compare, const char \texorpdfstring{$\ast$}{*}current\+\_\+version)
+\item 
+esp\+\_\+err\+\_\+t \mbox{\hyperlink{ota__http_8c_a393328b3013ecbb027034e393e657dc7}{\+\_\+http\+\_\+handle}} (esp\+\_\+http\+\_\+client\+\_\+event\+\_\+t \texorpdfstring{$\ast$}{*}evt)
+\item 
+void \mbox{\hyperlink{ota__http_8c_a8484710064bc068f09da2f65334d2e3d}{http\+\_\+config\+\_\+get\+\_\+request}} (esp\+\_\+http\+\_\+client\+\_\+config\+\_\+t \texorpdfstring{$\ast$}{*}conf, \mbox{\hyperlink{structota__http__t}{ota\+\_\+http\+\_\+t}} \texorpdfstring{$\ast$}{*}http\+\_\+config, bool version, bool evt)
+\item 
+esp\+\_\+err\+\_\+t \mbox{\hyperlink{ota__http_8c_a67358c721f36f48edaa357ead0529774}{perfom\+\_\+request}} (esp\+\_\+http\+\_\+client\+\_\+config\+\_\+t \texorpdfstring{$\ast$}{*}config)
+\item 
+void \mbox{\hyperlink{ota__http_8c_a3df4f992edda330df85bd66376686438}{perform\+\_\+http\+\_\+ota}} (\mbox{\hyperlink{structota__http__t}{ota\+\_\+http\+\_\+t}} \texorpdfstring{$\ast$}{*}http\+\_\+config)
+\item 
+void \mbox{\hyperlink{ota__http_8c_a75f8f4ddb5fe56077e82179e946a6221}{ota\+\_\+monitor\+\_\+task}} (void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{ota__http_8c_a68c683fe6ce3afd17f08a6d80c438a53}{RUNNING\+\_\+\+OTA}} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{ota__http_8c_a1c6d5de492ac61ad29aec7aa9a436bbf}\index{ota\_http.c@{ota\_http.c}!VERSION@{VERSION}}
+\index{VERSION@{VERSION}!ota\_http.c@{ota\_http.c}}
+\doxysubsubsection{\texorpdfstring{VERSION}{VERSION}}
+{\footnotesize\ttfamily \label{ota__http_8c_a1c6d5de492ac61ad29aec7aa9a436bbf} 
+\#define VERSION~"{}1.\+0.\+0"{}}
+
+\Hypertarget{ota__http_8c_a138276b7ce80f63d7ac005a4485bce40}\index{ota\_http.c@{ota\_http.c}!VERSION\_KEY@{VERSION\_KEY}}
+\index{VERSION\_KEY@{VERSION\_KEY}!ota\_http.c@{ota\_http.c}}
+\doxysubsubsection{\texorpdfstring{VERSION\_KEY}{VERSION\_KEY}}
+{\footnotesize\ttfamily \label{ota__http_8c_a138276b7ce80f63d7ac005a4485bce40} 
+\#define VERSION\+\_\+\+KEY~"{}version"{}}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{ota__http_8c_a393328b3013ecbb027034e393e657dc7}\index{ota\_http.c@{ota\_http.c}!\_http\_handle@{\_http\_handle}}
+\index{\_http\_handle@{\_http\_handle}!ota\_http.c@{ota\_http.c}}
+\doxysubsubsection{\texorpdfstring{\_http\_handle()}{\_http\_handle()}}
+{\footnotesize\ttfamily \label{ota__http_8c_a393328b3013ecbb027034e393e657dc7} 
+esp\+\_\+err\+\_\+t \+\_\+http\+\_\+handle (\begin{DoxyParamCaption}\item[{esp\+\_\+http\+\_\+client\+\_\+event\+\_\+t \texorpdfstring{$\ast$}{*}}]{evt}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ota__http_8c_a802bd59bdbc9d0c29c4772fa0f881962}\index{ota\_http.c@{ota\_http.c}!compare\_version@{compare\_version}}
+\index{compare\_version@{compare\_version}!ota\_http.c@{ota\_http.c}}
+\doxysubsubsection{\texorpdfstring{compare\_version()}{compare\_version()}}
+{\footnotesize\ttfamily \label{ota__http_8c_a802bd59bdbc9d0c29c4772fa0f881962} 
+bool compare\+\_\+version (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{version\+\_\+to\+\_\+compare}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{current\+\_\+version}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ota__http_8c_a8484710064bc068f09da2f65334d2e3d}\index{ota\_http.c@{ota\_http.c}!http\_config\_get\_request@{http\_config\_get\_request}}
+\index{http\_config\_get\_request@{http\_config\_get\_request}!ota\_http.c@{ota\_http.c}}
+\doxysubsubsection{\texorpdfstring{http\_config\_get\_request()}{http\_config\_get\_request()}}
+{\footnotesize\ttfamily \label{ota__http_8c_a8484710064bc068f09da2f65334d2e3d} 
+void http\+\_\+config\+\_\+get\+\_\+request (\begin{DoxyParamCaption}\item[{esp\+\_\+http\+\_\+client\+\_\+config\+\_\+t \texorpdfstring{$\ast$}{*}}]{conf}{, }\item[{\mbox{\hyperlink{structota__http__t}{ota\+\_\+http\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{http\+\_\+config}{, }\item[{bool}]{version}{, }\item[{bool}]{evt}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ota__http_8c_a7c7c22a79059b0aff6bf2c82a3533e1e}\index{ota\_http.c@{ota\_http.c}!init\_ota\_monitor@{init\_ota\_monitor}}
+\index{init\_ota\_monitor@{init\_ota\_monitor}!ota\_http.c@{ota\_http.c}}
+\doxysubsubsection{\texorpdfstring{init\_ota\_monitor()}{init\_ota\_monitor()}}
+{\footnotesize\ttfamily \label{ota__http_8c_a7c7c22a79059b0aff6bf2c82a3533e1e} 
+void init\+\_\+ota\+\_\+monitor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structota__http__t}{ota\+\_\+http\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{http\+\_\+config}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ota__http_8c_a75f8f4ddb5fe56077e82179e946a6221}\index{ota\_http.c@{ota\_http.c}!ota\_monitor\_task@{ota\_monitor\_task}}
+\index{ota\_monitor\_task@{ota\_monitor\_task}!ota\_http.c@{ota\_http.c}}
+\doxysubsubsection{\texorpdfstring{ota\_monitor\_task()}{ota\_monitor\_task()}}
+{\footnotesize\ttfamily \label{ota__http_8c_a75f8f4ddb5fe56077e82179e946a6221} 
+void ota\+\_\+monitor\+\_\+task (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ota__http_8c_a108a0e9007fff74adf8187c204a0c499}\index{ota\_http.c@{ota\_http.c}!parse\_json@{parse\_json}}
+\index{parse\_json@{parse\_json}!ota\_http.c@{ota\_http.c}}
+\doxysubsubsection{\texorpdfstring{parse\_json()}{parse\_json()}}
+{\footnotesize\ttfamily \label{ota__http_8c_a108a0e9007fff74adf8187c204a0c499} 
+esp\+\_\+err\+\_\+t parse\+\_\+json (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{json\+\_\+str}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{version\+\_\+buffer}{, }\item[{size\+\_\+t}]{version\+\_\+buffer\+\_\+size}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ota__http_8c_a67358c721f36f48edaa357ead0529774}\index{ota\_http.c@{ota\_http.c}!perfom\_request@{perfom\_request}}
+\index{perfom\_request@{perfom\_request}!ota\_http.c@{ota\_http.c}}
+\doxysubsubsection{\texorpdfstring{perfom\_request()}{perfom\_request()}}
+{\footnotesize\ttfamily \label{ota__http_8c_a67358c721f36f48edaa357ead0529774} 
+esp\+\_\+err\+\_\+t perfom\+\_\+request (\begin{DoxyParamCaption}\item[{esp\+\_\+http\+\_\+client\+\_\+config\+\_\+t \texorpdfstring{$\ast$}{*}}]{config}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ota__http_8c_a3df4f992edda330df85bd66376686438}\index{ota\_http.c@{ota\_http.c}!perform\_http\_ota@{perform\_http\_ota}}
+\index{perform\_http\_ota@{perform\_http\_ota}!ota\_http.c@{ota\_http.c}}
+\doxysubsubsection{\texorpdfstring{perform\_http\_ota()}{perform\_http\_ota()}}
+{\footnotesize\ttfamily \label{ota__http_8c_a3df4f992edda330df85bd66376686438} 
+void perform\+\_\+http\+\_\+ota (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structota__http__t}{ota\+\_\+http\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{http\+\_\+config}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{ota__http_8c_a68c683fe6ce3afd17f08a6d80c438a53}\index{ota\_http.c@{ota\_http.c}!RUNNING\_OTA@{RUNNING\_OTA}}
+\index{RUNNING\_OTA@{RUNNING\_OTA}!ota\_http.c@{ota\_http.c}}
+\doxysubsubsection{\texorpdfstring{RUNNING\_OTA}{RUNNING\_OTA}}
+{\footnotesize\ttfamily \label{ota__http_8c_a68c683fe6ce3afd17f08a6d80c438a53} 
+bool RUNNING\+\_\+\+OTA = false}
+

@@ -9,6 +9,14 @@
 #define END_POINT_FIRMWARE "/ota_update"
 #define HOST "10.109.49.78"
 
+
+
+/**
+ * @brief Loop principal, inicializa o nvs e os gpio, logo em seguida o wifi.
+ * Após a inicialização do wifi, inicializa as tarefas do servidor web e do monitoramento ota
+ * 
+ */
+
 void app_main(void)
 {
     esp_err_t ret = nvs_flash_init();
